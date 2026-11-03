@@ -80,6 +80,7 @@ Thumbs.db
 # Logs & monitoring
 logs/
 *.log
+*.cache
 tensorboard_logs/
 
 # Temporary files & uploads
