@@ -1,0 +1,31 @@
+<routes>
+    <vType id="car" vClass="passenger"/>
+
+    <route id="left_to_right" edges="E3 E4"/>
+    <route id="right_to_left" edges="-E4 -E3"/>
+    <route id="top_to_bottom" edges="-E5 E6"/>
+    <route id="bottom_to_top" edges="-E6 E5"/>
+
+    <route id="left_to_top"   edges="E3 E5"/>
+    <route id="left_to_bottom"  edges="E3 E6"/>
+    <route id="top_to_right"  edges="-E5 E4"/>
+    <route id="bottom_to_left" edges="-E6 -E3"/>
+
+    <route id="right_to_bottom" edges="-E4 E6" />
+    <route id="bottom_to_right" edges="-E6 E4"/>
+
+    <flow id="flow_lr_straight" type="car" route="left_to_right" vehsPerHour="350" departLane="1" />
+    <flow id="flow_lt_left_turn" type="car" route="left_to_top"   vehsPerHour="150" departLane="1" />
+    <flow id="flow_lb_right_turn" type="car" route="left_to_bottom"  vehsPerHour="120" departLane="0" />
+
+    <flow id="flow_rl_straight" type="car" route="right_to_left" vehsPerHour="350" departLane="1" />
+    <flow id="flow_rb_left_turn" type="car" route="right_to_bottom" vehsPerHour="150" departLane="1" />
+    
+    <flow id="flow_tb_straight" type="car" route="top_to_bottom" vehsPerHour="50" departLane="1" />
+    <flow id="flow_tr_left_turn" type="car" route="top_to_right" vehsPerHour="100" departLane="1" />
+
+    <flow id="flow_bt_straight" type="car" route="bottom_to_top" vehsPerHour="300" departLane="1" />
+    <flow id="flow_bl_left_turn" type="car" route="bottom_to_left" vehsPerHour="100" departLane="1" />
+    <flow id="flow_br_right_turn" type="car" route="bottom_to_right" vehsPerHour="120" departLane="0" />
+
+</routes>
