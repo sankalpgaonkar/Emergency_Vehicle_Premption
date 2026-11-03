@@ -1,0 +1,95 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv
+venv/
+env/
+ENV/
+.venv
+.venv/
+.env
+.env/
+
+# Large Files & Media (ignore videos generally, except demo videos in project/videos/)
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+project/videos/*
+!project/videos/*.mp4
+
+# Base AI Models (large downloads)
+*.pt
+*.pth
+*.onnx
+*.pb
+*.h5
+*.zip
+
+# Whitelist project trained models
+!project/models/
+!project/models/yolo_emergency_detector.pt
+!project/models/ppo_traffic_model_v2.zip
+!project/models/ppo_traffic_model_v3.zip
+
+# Ignore duplicate training weights
+runs/**/weights/
+
+# SUMO temporary / large simulation runs
+sumo/
+*.sumo.cfg
+*.sumocfg
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs & monitoring
+logs/
+*.log
+tensorboard_logs/
+
+# Temporary files & uploads
+tmp/
+temp/
+.tmp/
+uploads/
+
+# Secrets & API Keys
+*apikeys.txt
+*.key
+*.pem
+.env*

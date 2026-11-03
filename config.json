@@ -1,0 +1,118 @@
+{
+  "system": {
+    "name": "AI Traffic Management System",
+    "version": "2.0.0",
+    "description": "Next-generation traffic optimization with AI and computer vision",
+    "author": "Sankalp Gaonkar",
+    "github": "https://github.com/sankalpgaonkar/AI-Traffic-Management-System"
+  },
+  
+  "models": {
+    "traffic_ai": {
+      "path": "project/models/ppo_traffic_model_v2.zip",
+      "type": "PPO",
+      "description": "Reinforcement learning model for traffic optimization"
+    },
+    "emergency_detector": {
+      "path": "project/models/yolo_emergency_detector.pt",
+      "type": "YOLOv8",
+      "description": "Emergency vehicle detection model"
+    },
+    "general_detector": {
+      "path": "yolov8m.pt",
+      "type": "YOLOv8",
+      "description": "General vehicle detection model"
+    }
+  },
+  
+  "video_sources": {
+    "intersection_1": {
+      "path": "project/videos/intersection1.mp4",
+      "description": "North-West intersection camera",
+      "detection_zones": [
+        [[874, 1086], [1443, 1035], [793, 581], [572, 590]],
+        [[1947, 920], [2129, 1007], [2778, 935], [2709, 856]]
+      ]
+    },
+    "intersection_2": {
+      "path": "project/videos/intersection2.mp4", 
+      "description": "South-East intersection camera",
+      "detection_zones": [
+        [[1445, 806], [1596, 903], [2647, 784], [2447, 682]],
+        [[1239, 1138], [1792, 1029], [2804, 1537], [2031, 1667]]
+      ]
+    }
+  },
+  
+  "sumo_config": {
+    "net_file": "project/sumo_files/jaipur.net.xml",
+    "route_file": "project/sumo_files/jaipur.rou.xml",
+    "traffic_light_id": "J5",
+    "use_gui": true,
+    "simulation_seconds": 86400
+  },
+  
+  "detection_settings": {
+    "confidence_threshold": 0.5,
+    "vehicle_classes": [2, 3, 5, 7],
+    "emergency_classes": ["ambulance", "fire brigade", "police"],
+    "decision_interval_seconds": 5,
+    "tracking_enabled": true
+  },
+  
+  "web_interface": {
+    "host": "0.0.0.0",
+    "port": 5001,
+    "debug": false,
+    "cors_enabled": true,
+    "auto_refresh_interval": 1000
+  },
+  
+  "analytics": {
+    "save_screenshots": true,
+    "save_analytics": true,
+    "output_directory": "project/results",
+    "chart_style": "dark_background",
+    "performance_metrics": [
+      "wait_time_reduction",
+      "detection_accuracy", 
+      "emergency_response_time",
+      "system_efficiency"
+    ]
+  },
+  
+  "alerts": {
+    "emergency_alert_duration": 5.0,
+    "alert_cooldown": 2.0,
+    "sound_alerts": false,
+    "email_notifications": false,
+    "webhook_url": null
+  },
+  
+  "display": {
+    "window_size": {
+      "width": 1200,
+      "height": 800
+    },
+    "colors": {
+      "emergency": [0, 0, 255],
+      "normal": [0, 255, 0],
+      "zone_highlight": [0, 255, 255],
+      "text_background": [0, 0, 0],
+      "alert": [0, 255, 255]
+    },
+    "fonts": {
+      "main": "FONT_HERSHEY_DUPLEX",
+      "size": 0.8,
+      "thickness": 2
+    }
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "save_logs": true,
+    "log_directory": "logs",
+    "max_log_files": 10,
+    "performance_logging": true
+  }
+}
