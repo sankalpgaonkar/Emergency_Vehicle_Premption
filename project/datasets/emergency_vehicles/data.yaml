@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['ambulance', 'fire brigade', 'police']
+
+roboflow:
+  workspace: jd-s39ap
+  project: emergency-vehicle-crigt
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/jd-s39ap/emergency-vehicle-crigt/dataset/1
