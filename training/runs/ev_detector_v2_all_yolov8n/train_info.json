@@ -1,0 +1,16 @@
+{
+ "train_seconds": 7254.2,
+ "args": {
+  "data": "datasets_all/data.yaml",
+  "weights": "training/yolov8n.pt",
+  "epochs": 100,
+  "imgsz": 640,
+  "batch": 16,
+  "device": "cpu",
+  "project": "training/runs",
+  "name": "ev_detector_v2_all_yolov8n",
+  "patience": 0
+ },
+ "machine": "Linux-6.1.158+-x86_64-with-glibc2.36",
+ "processor": ""
+}

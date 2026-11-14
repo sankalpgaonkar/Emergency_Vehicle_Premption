@@ -1,0 +1,13 @@
+.venv
+venv
+__pycache__
+*.pyc
+.git
+.gitignore
+.vscode
+project/datasets
+training/runs
+runs
+docs
+tests
+

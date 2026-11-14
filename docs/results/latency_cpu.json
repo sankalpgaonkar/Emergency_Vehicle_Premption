@@ -1,0 +1,55 @@
+{
+ "note": "cand_v2_yolov8n = A, cand_v2_yolo11n = B, cand_v2_all_yolov8n = C (project/models/ev_detector_v2_sankalp.pt), yolo_emergency_detector = v1",
+ "image": "external_test/pos_amb/56d2f78106.jpg",
+ "machine": "Linux-6.1.158+-x86_64-with-glibc2.36",
+ "models": {
+  "yolo_emergency_detector.pt": [
+   {
+    "median_ms": 22.29,
+    "p95_ms": 23.86,
+    "threads": 4
+   },
+   {
+    "median_ms": 22.4,
+    "p95_ms": 26.42,
+    "threads": 4
+   }
+  ],
+  "cand_v2_yolov8n.pt": [
+   {
+    "median_ms": 24.07,
+    "p95_ms": 25.68,
+    "threads": 4
+   },
+   {
+    "median_ms": 23.57,
+    "p95_ms": 24.0,
+    "threads": 4
+   }
+  ],
+  "cand_v2_yolo11n.pt": [
+   {
+    "median_ms": 22.81,
+    "p95_ms": 23.47,
+    "threads": 4
+   },
+   {
+    "median_ms": 21.2,
+    "p95_ms": 21.5,
+    "threads": 4
+   }
+  ],
+  "cand_v2_all_yolov8n.pt": [
+   {
+    "median_ms": 22.37,
+    "p95_ms": 24.66,
+    "threads": 4
+   },
+   {
+    "median_ms": 23.87,
+    "p95_ms": 24.94,
+    "threads": 4
+   }
+  ]
+ }
+}

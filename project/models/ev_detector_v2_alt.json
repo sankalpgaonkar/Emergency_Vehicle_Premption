@@ -1,0 +1,6 @@
+{
+ "label": "v2alt \u00b7 YOLO11n, filtered split",
+ "arch": "yolo11n",
+ "trained": "2026-11-03",
+ "run": "training/runs/ev_detector_v2_yolo11n"
+}

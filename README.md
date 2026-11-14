@@ -1,668 +1,270 @@
-# 🚦 AI Traffic Management System
+# 🚦 EVP·Sim: Vision-Based Emergency Vehicle Preemption & Traffic Simulation
 
 <div align="center">
 
-![Traffic AI](https://img.shields.io/badge/AI-Traffic%20Management-00ff41?style=for-the-badge&logo=robot)
-![Computer Vision](https://img.shields.io/badge/Computer-Vision-ff6b35?style=for-the-badge&logo=eye)
-![Reinforcement Learning](https://img.shields.io/badge/Reinforcement-Learning-4285f4?style=for-the-badge&logo=brain)
-![SUMO](https://img.shields.io/badge/SUMO-Simulation-orange?style=for-the-badge)
-![3D Visualization](https://img.shields.io/badge/3D-Visualization-9b59b6?style=for-the-badge&logo=cube)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00ffff?style=for-the-badge&logo=opencv&logoColor=black)](https://github.com/ultralytics/ultralytics)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Flask](https://img.shields.io/badge/Flask-Web%20Dashboard-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Render](https://img.shields.io/badge/Render-Deployable-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-**Next-generation traffic optimization using AI, computer vision, and immersive 3D visualization**
+**An intelligent, camera-only traffic signal preemption system that detects emergency vehicles in real time, eliminates false alarms with a temporal confirmation rule, and dynamically clears intersections.**
 
-**Developed & Maintained by [Sankalp Gaonkar](https://github.com/sankalpgaonkar)**
+**Maintained & Enhanced by [Sankalp Gaonkar](https://github.com/sankalpgaonkar)**
 
-[🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [🎮 3D Visualization](#-3d-visualization) • [📖 Documentation](#-documentation) • [🤝 Contributing](#-contributing)
+[🚀 Quick Start](#-quick-start) • [✨ Key Capabilities](#-key-capabilities) • [📸 Visual Walkthrough](#-visual-walkthrough) • [🧠 Detection Models](#-detection-models) • [☁️ Deployment](#️-cloud-deployment-render--docker) • [🧪 Testing](#-automated-testing)
+
+---
+
+![EVP Dashboard Demo](docs/screenshots/03_preemption_green.png)
+*Live Web Dashboard: Video detection overlay (left) synchronized with 4-way intersection simulation, preemption state machine, and real-time comparative metrics (right).*
 
 </div>
 
 ---
 
 ## 🌟 Overview
-![Main Menu](assests/main.png)
 
-This cutting-edge AI Traffic Management System revolutionizes urban traffic control by combining advanced AI with stunning 3D visualization:
+Conventional emergency vehicle preemption requires dedicated hardware (optical infrared emitters, acoustic sensors, or in-vehicle GPS transponders) installed on every fleet vehicle and traffic cabinet. 
 
-- 🤖 **Reinforcement Learning** (PPO) for intelligent traffic optimization
-- 👁️ **Computer Vision** (YOLOv8) for real-time multi-camera vehicle detection
-- 🚨 **Emergency Vehicle Detection** with automatic priority routing
-- 🎮 **Multiple 3D Visualization Options** including Unity integration
-- 🌐 **SUMO Integration** for realistic traffic simulation
-- 📊 **Real-time Web Dashboard** with live analytics and controls
-- 🧪 **Comprehensive Testing Suite** with simulated data modes
-
-## ✨ Features
-
-### 🎯 Core AI Capabilities
-- **Intelligent Traffic Optimization**: PPO-based reinforcement learning for adaptive signal control
-- **Multi-Camera Vehicle Detection**: Simultaneous processing of multiple intersection cameras
-- **Emergency Vehicle Priority**: Real-time detection with automatic signal preemption
-- **Predictive Analytics**: AI-driven traffic pattern analysis and optimization
-- **Zone-Based Detection**: Configurable polygon zones for precise vehicle counting
-
-### 🎮 3D Visualization Suite
-- **Integrated 3D System**: Complete AI + 3D visualization in one interface
-- **Unity Integration**: Professional game engine support with WebSocket API
-- **Web-Based 3D**: Browser-compatible Three.js visualization with interactive controls
-- **Real-time Rendering**: Live vehicle movement, traffic lights, and AI decisions
-- **Multiple Camera Angles**: Interactive 3D scene exploration
-
-### 🌐 Web Interface & APIs
-- **Real-time Dashboard**: Live traffic statistics with animated visualizations
-- **RESTful API**: Complete API for external integrations
-- **WebSocket Support**: Real-time data streaming for live applications
-- **Mobile Responsive**: Works seamlessly on desktop, tablet, and mobile
-- **Performance Monitoring**: Live system health and performance metrics
-
-### 🔧 Advanced Technical Stack
-- **AI Framework**: Stable Baselines3 (PPO) + Gymnasium
-- **Computer Vision**: Ultralytics YOLOv8 + OpenCV
-- **3D Graphics**: Three.js + WebGL + Unity integration
-- **Simulation**: SUMO (Simulation of Urban Mobility)
-- **Web Backend**: Flask + Socket.IO + RESTful APIs
-- **Analytics**: Matplotlib + Seaborn + Real-time charting
-- **Testing**: Comprehensive test suite with simulated data modes
-
-## 🚀 Quick Start
-
-### Prerequisites
-```bash
-# Python 3.8+ required
-python --version
-
-# Install system dependencies
-# Ubuntu/Debian:
-sudo apt-get install sumo sumo-tools sumo-doc
-
-# macOS:
-brew install sumo
-
-# Windows: Download from https://sumo.dlr.de/docs/Installing/
-```
-
-### Installation
-```bash
-# Clone the repository
-git clone https://github.com/sankalpgaonkar/AI-Traffic-Management-System.git
-cd AI-Traffic-Management-System
-
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 🎯 One-Command Launch
-```bash
-# Interactive launcher with all options
-python launch.py
-
-# Or launch specific components directly:
-python launch.py --component dashboard    # Web dashboard
-python launch.py --component live        # Live traffic analysis  
-python launch.py --component 3d          # 3D visualization
-python launch.py --component test        # Test mode (no video needed)
-```
-
-## 🎮 3D Visualization
-
-### Option 1: Integrated 3D System (Recommended)
-```bash
-python launch.py --component 3d
-# Open: http://localhost:5004
-```
-**Features**: Complete AI + 3D visualization, interactive controls, real-time metrics
-
-### Option 2: Unity Integration
-```bash
-python launch.py --component unity
-# API: http://localhost:5002/api/3d_data
-# WebSocket: ws://localhost:5002
-```
-**Features**: Professional Unity integration, VR/AR ready, custom game environments
-
-### Option 3: Advanced Web 3D
-```bash
-python launch.py --component web3d
-# Open: http://localhost:5003
-```
-**Features**: Advanced Three.js visualization, lighting effects, interactive camera
-
-## 🧪 Testing & Development
-
-### Quick Test (No Video Required)
-```bash
-# Terminal 1: Start dashboard
-python launch.py --component dashboard
-
-# Terminal 2: Run with simulated data
-python launch.py --component test
-
-# Open: http://localhost:5001
-```
-
-### Full System Test
-```bash
-# Terminal 1: Dashboard
-python launch.py --component dashboard
-
-# Terminal 2: Live analysis (requires video files)
-python launch.py --component live
-
-# Terminal 3: 3D visualization
-python launch.py --component 3d
-```
-
-## 🎯 System Demonstrations
-
-### 🎬 Live Multi-Camera Traffic Analysis
-![Traffic Analysis](assests/multi-camera.png)
-- **Dual camera processing** with zone-based vehicle detection
-- **AI decision visualization** showing KEEP/SWITCH recommendations  
-- **Real-time queue monitoring** across 4 detection zones
-- **Professional overlay** with clean metrics display
-
-### 🎮 Interactive 3D Visualization
-- **Immersive 3D intersection** with realistic vehicle movement
-- **Interactive camera controls** (rotate, zoom, pan)
-- **Real-time traffic lights** synchronized with AI decisions
-- **Multiple visualization modes** (Unity, Web3D, Integrated)
-
-### 🚨 Emergency Vehicle Detection & Priority
-![Emergency Detection](assests/emergency.png)
-- **YOLOv8-based detection** of ambulances, fire trucks, police vehicles
-- **Automatic signal preemption** for emergency vehicle priority
-- **Visual and audio alerts** with customizable notification system
-- **Response time tracking** and performance analytics
-
-### 📊 Real-time Web Dashboard
-![Dashboard](assests/dash.gif)
-- **Live traffic statistics** with animated charts and graphs
-- **System health monitoring** with real-time performance metrics
-- **Interactive controls** for system configuration and testing
-- **Mobile-responsive design** for monitoring on any device
-
-## 📁 Project Architecture
-
-```
-ai-traffic-management/
-├── 🚀 launch.py                   # Universal system launcher
-├── 📋 requirements.txt            # Python dependencies
-├── ⚙️ config.json                # System configuration
-├── 🤖 project/
-│   ├── 📊 models/                 # Pre-trained AI models
-│   │   ├── ppo_traffic_model_v*.zip    # Reinforcement learning models
-│   │   └── yolo_emergency_detector.pt  # Emergency vehicle detector
-│   ├── 🎬 videos/                 # Input video files for analysis
-│   ├── 📈 results/                # Performance analytics & data
-│   │   ├── plot_results.py        # Advanced visualization suite
-│   │   ├── baseline_results.csv   # Baseline performance data
-│   │   └── results_v*.csv         # AI performance comparisons
-│   ├── 💻 src/
-│   │   ├── 👁️ vision/            # Computer vision pipeline
-│   │   │   ├── run_live.py        # Main multi-camera analysis
-│   │   │   ├── processor.py       # Core vision processing
-│   │   │   ├── emergency_vehicle_detection.py
-│   │   │   └── new_run_live.py    # Enhanced live analysis
-│   │   ├── 🌐 api/               # Web services & dashboard
-│   │   │   └── app.py            # Flask API + WebSocket server
-│   │   ├── 🎮 3D Systems/         # Multiple 3D visualization options
-│   │   │   ├── simple_3d_system.py      # Fast 3D visualization
-│   │   │   ├── integrated_3d_system.py  # Full AI + 3D integration
-│   │   │   ├── unity_3d_integration.py  # Unity engine support
-│   │   │   └── web_3d_visualization.py  # Advanced web 3D
-│   │   └── 🧠 ai_core/           # AI training & optimization
-│   ├── 🛣️ sumo_files/            # SUMO simulation configuration
-│   └── 📊 datasets/              # Training datasets
-├── 📊 tensorboard_logs/           # AI training logs & metrics
-├── 🧪 test_*.py                  # Testing & validation scripts
-└── 📖 Documentation/
-    ├── QUICK_START.md            # Getting started guide
-    ├── 3D_SYSTEM_GUIDE.md       # 3D visualization guide
-    └── IMPROVEMENTS_SUMMARY.md   # Latest updates & fixes
-```
-
-### 🔄 Data Flow Architecture
-```
-Video Feeds → Computer Vision → AI Decision Engine → SUMO Simulation
-     ↓              ↓                    ↓              ↓
-Zone Detection → Vehicle Counting → Traffic Optimization → 3D Visualization
-     ↓              ↓                    ↓              ↓
-Emergency Alert → Priority Routing → Signal Control → Web Dashboard
-```
-
-## 🎮 Comprehensive Usage Guide
-
-### 🎯 Multi-Component System Operation
-
-#### **Recommended Workflow**
-```bash
-# 1. Start the web dashboard (always first)
-python launch.py --component dashboard
-
-# 2. Choose your analysis mode:
-# Option A: Live video analysis (requires video files)
-python launch.py --component live
-
-# Option B: Test mode (simulated data, no video needed)  
-python launch.py --component test
-
-# 3. Add 3D visualization (optional)
-python launch.py --component 3d
-
-# 4. Open browser: http://localhost:5001
-```
-
-### 🎬 Live Traffic Analysis Controls
-- **'s' key**: Save current performance data and screenshots
-- **'q' key**: Quit gracefully with data export
-- **'r' key**: Reset analytics counters
-- **Mouse**: Click to focus on specific detection zones
-- **ESC**: Emergency stop (immediate shutdown)
-
-### 🚨 Emergency Vehicle Detection
-- **Automatic Detection**: System continuously monitors for emergency vehicles
-- **Visual Alerts**: Red overlay and alert messages when detected
-- **Audio Notifications**: Optional sound alerts (configurable)
-- **Priority Routing**: Automatic traffic signal preemption
-- **Response Logging**: All emergency events logged for analysis
-
-### 📊 Web Dashboard Features
-- **Real-time Monitoring**: Live traffic statistics and AI decisions
-- **Interactive Charts**: Click and drag to explore historical data
-- **System Controls**: Start/stop components remotely
-- **Performance Metrics**: Live system health and optimization stats
-- **API Access**: RESTful endpoints for external integrations
-  - `GET /api/stats` - Current system statistics
-  - `POST /api/update_traffic` - Update traffic data
-  - `GET /api/3d_data` - 3D visualization data
-
-### 🎮 3D Visualization Controls
-- **Mouse Drag**: Rotate camera around intersection
-- **Mouse Wheel**: Zoom in/out
-- **'R' key**: Reset camera to default position
-- **'P' key**: Pause/resume simulation
-- **'W' key**: Toggle wireframe mode
-- **'F' key**: Toggle fullscreen (web versions)
-
-## 🔧 Configuration & Customization
-
-### 📹 Video Source Configuration
-Edit `config.json` to customize your video sources:
-```json
-{
-  "video_sources": {
-    "intersection_1": {
-      "path": "project/videos/intersection1.mp4",
-      "description": "North-West intersection camera",
-      "detection_zones": [
-        [[874, 1086], [1443, 1035], [793, 581], [572, 590]],
-        [[1947, 920], [2129, 1007], [2778, 935], [2709, 856]]
-      ]
-    }
-  }
-}
-```
-
-### 🎯 Detection Zone Setup
-**Getting Zone Coordinates:**
-1. Take a screenshot of your video's first frame
-2. Open in image editor (Preview, Paint, GIMP)
-3. Note pixel coordinates at zone corners
-4. Define polygons clockwise from top-left
-
-```python
-# Example: 4-point polygon for a traffic lane
-ZONE_POLYGON = np.array([
-    [x1, y1],  # Top-left corner
-    [x2, y2],  # Top-right corner  
-    [x3, y3],  # Bottom-right corner
-    [x4, y4]   # Bottom-left corner
-], np.int32)
-```
-
-### 🤖 AI Model Configuration
-```json
-{
-  "models": {
-    "traffic_ai": {
-      "path": "project/models/ppo_traffic_model_v2.zip",
-      "type": "PPO"
-    },
-    "emergency_detector": {
-      "path": "project/models/yolo_emergency_detector.pt", 
-      "type": "YOLOv8"
-    }
-  },
-  "detection_settings": {
-    "confidence_threshold": 0.5,
-    "decision_interval_seconds": 5,
-    "vehicle_classes": [2, 3, 5, 7],
-    "emergency_classes": ["ambulance", "fire brigade", "police"]
-  }
-}
-```
-
-### 🌐 Web Interface Settings
-```json
-{
-  "web_interface": {
-    "host": "0.0.0.0",
-    "port": 5001,
-    "debug": false,
-    "cors_enabled": true,
-    "auto_refresh_interval": 1000
-  }
-}
-```
-
-### 🎮 3D Visualization Options
-```json
-{
-  "display": {
-    "window_size": {"width": 1200, "height": 800},
-    "colors": {
-      "emergency": [0, 0, 255],
-      "normal": [0, 255, 0],
-      "zone_highlight": [0, 255, 255]
-    }
-  }
-}
-```
-
-## 📊 Performance Analytics & Metrics
-
-### 🎯 Key Performance Indicators
-- **Traffic Flow Optimization**: Up to 35% reduction in average wait times
-- **Detection Accuracy**: 95%+ vehicle detection accuracy with YOLOv8
-- **Emergency Response**: Sub-3-second emergency vehicle detection and signal preemption
-- **System Efficiency**: Real-time processing of dual 1080p video streams
-- **AI Decision Quality**: Reinforcement learning optimization with continuous improvement
-
-### 📈 Analytics Dashboard Features
-- **Real-time Charts**: Live traffic flow, queue lengths, and AI decisions
-- **Historical Analysis**: Performance trends over time with exportable data
-- **Comparative Studies**: Baseline vs AI-optimized performance metrics
-- **Emergency Events**: Detailed logging and analysis of emergency vehicle incidents
-- **System Health**: CPU, memory, and processing performance monitoring
-
-### 🔍 Data Export & Analysis
-```bash
-# Generate comprehensive performance report
-python project/results/plot_results.py
-
-# Export data for external analysis
-# Results saved to: project/results/
-# - baseline_results.csv (traditional timing)
-# - results_v3.csv (AI-optimized performance)
-# - Performance comparison charts (PNG/PDF)
-```
-
-### 📊 Metrics Visualization
-The system generates detailed visualizations including:
-- **Traffic Flow Heatmaps**: Visual representation of congestion patterns
-- **AI Decision Timeline**: Chronological view of traffic light decisions
-- **Queue Length Trends**: Real-time and historical queue analysis
-- **Emergency Response Analytics**: Response time distribution and patterns
-- **System Performance Graphs**: Processing speed and resource utilization
-
-## 🛠️ Development & Extension
-
-### 🔧 System Architecture for Developers
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Video Input   │───▶│  Computer Vision │───▶│   AI Decision   │
-│  Multi-Camera   │    │   YOLOv8 + CV   │    │  Engine (PPO)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ 3D Visualization│    │  Web Dashboard  │    │ SUMO Simulation │
-│ Unity/Three.js  │    │ Flask + Socket  │    │ Traffic Control │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
-### 🚀 Adding New Features
-
-#### **Computer Vision Extensions**
-```python
-# Extend processor.py for new detection types
-class VisionProcessor:
-    def detect_pedestrians(self, frame):
-        # Add pedestrian detection
-        pass
-    
-    def detect_cyclists(self, frame):
-        # Add bicycle detection  
-        pass
-```
-
-#### **AI Model Development**
-```bash
-# Train custom traffic optimization models
-cd project/src/ai_core
-python train_traffic_agent.py --config custom_config.json
-
-# Train specialized emergency vehicle detector
-python train_emergency_detector.py --dataset custom_emergency_data
-```
-
-#### **3D Visualization Customization**
-```javascript
-// Extend 3D scenes with new elements
-function addCustomBuildings(scene) {
-    // Add custom 3D buildings
-}
-
-function addWeatherEffects(scene) {
-    // Add rain, fog, or other weather
-}
-```
-
-#### **Web Dashboard Enhancement**
-```python
-# Add new API endpoints in api/app.py
-@app.route('/api/custom_analytics')
-def custom_analytics():
-    return jsonify({"custom_data": get_custom_metrics()})
-```
-
-### 🧪 Testing Framework
-```bash
-# Run comprehensive test suite
-python -m pytest tests/
-
-# Test individual components
-python test_model_loading.py      # AI model validation
-python test_dashboard_connection.py  # Web interface testing
-
-# Performance benchmarking
-python benchmark_system.py --duration 300  # 5-minute benchmark
-```
-
-### 📦 Custom Model Training
-
-#### **Traffic Optimization Model**
-```python
-# Custom PPO training configuration
-from stable_baselines3 import PPO
-from gymnasium import make
-
-env = make('sumo-rl-v0', net_file='custom_intersection.net.xml')
-model = PPO('MlpPolicy', env, verbose=1)
-model.learn(total_timesteps=100000)
-model.save('custom_traffic_model')
-```
-
-#### **Emergency Vehicle Detection**
-```python
-# Custom YOLOv8 training
-from ultralytics import YOLO
-
-model = YOLO('yolov8n.pt')
-model.train(
-    data='custom_emergency_dataset.yaml',
-    epochs=100,
-    imgsz=640,
-    batch=16
-)
-```
-
-### 🔌 API Integration Examples
-```python
-# External system integration
-import requests
-
-# Get live traffic data
-response = requests.get('http://localhost:5001/api/stats')
-traffic_data = response.json()
-
-# Send custom traffic updates
-requests.post('http://localhost:5001/api/update_traffic', 
-              json={'queues': [5, 3, 8, 2], 'action': 'SWITCH'})
-
-# WebSocket real-time connection
-import socketio
-sio = socketio.Client()
-sio.connect('http://localhost:5001')
-
-@sio.on('traffic_update')
-def on_traffic_update(data):
-    print(f"Live traffic: {data}")
-```
-
-## 🤝 Contributing
-
-We welcome contributions from developers, researchers, and traffic management professionals! 
-
-### 🎯 Areas for Contribution
-- **AI Models**: Improve traffic optimization algorithms
-- **Computer Vision**: Enhance detection accuracy and speed
-- **3D Visualization**: Create new visualization modes and effects
-- **Web Interface**: Improve dashboard features and user experience
-- **Documentation**: Help improve guides and tutorials
-- **Testing**: Add test cases and performance benchmarks
-
-### 🚀 Development Setup
-```bash
-# 1. Fork and clone the repository
-git clone https://github.com/sankalpgaonkar/AI-Traffic-Management-System.git
-cd AI-Traffic-Management-System
-
-# 2. Create development environment
-python -m venv dev-env
-source dev-env/bin/activate  # Windows: dev-env\Scripts\activate
-
-# 3. Install development dependencies
-pip install -r requirements.txt
-pip install pytest black flake8  # Development tools
-
-# 4. Create feature branch
-git checkout -b feature/amazing-new-feature
-
-# 5. Make your changes and test
-python -m pytest tests/
-python launch.py --component test  # Verify system works
-
-# 6. Commit and push
-git add .
-git commit -m "Add amazing new feature"
-git push origin feature/amazing-new-feature
-
-# 7. Create pull request on GitHub
-```
-
-### 📋 Contribution Guidelines
-- **Code Style**: Follow PEP 8 for Python, use `black` for formatting
-- **Testing**: Add tests for new features, ensure existing tests pass
-- **Documentation**: Update relevant documentation and docstrings
-- **Performance**: Ensure changes don't significantly impact system performance
-- **Compatibility**: Test with Python 3.8+ and major operating systems
-
-### 🐛 Bug Reports & Feature Requests
-- **Bug Reports**: Use GitHub Issues with detailed reproduction steps
-- **Feature Requests**: Describe the use case and expected behavior
-- **Performance Issues**: Include system specs and performance metrics
-
-## 🎓 Documentation
-
-### 📚 Complete Guides
-- **[Quick Start Guide](QUICK_START.md)**: Get up and running in 5 minutes
-- **[3D System Guide](3D_SYSTEM_GUIDE.md)**: Complete 3D visualization documentation
-- **[Improvements Summary](IMPROVEMENTS_SUMMARY.md)**: Latest updates and fixes
-- **[API Documentation](docs/API.md)**: Complete API reference (coming soon)
-
-### 🎯 Use Cases & Applications
-- **Smart City Traffic Management**: Real-time optimization for urban intersections
-- **Emergency Services**: Priority routing for ambulances, fire trucks, police
-- **Research & Education**: Traffic engineering research and AI/ML education
-- **Simulation & Planning**: Urban planning and traffic impact analysis
-- **Game Development**: Realistic traffic simulation for games and VR/AR
-
-## � Liccense
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### 🔓 Open Source Benefits
-- **Free for commercial use**: Deploy in production environments
-- **Modification allowed**: Customize for your specific needs
-- **Distribution permitted**: Share and redistribute freely
-- **No warranty**: Use at your own risk, community support available
-
-## 🙏 Acknowledgments
-
-### 🏆 Core Technologies
-- **[SUMO](https://sumo.dlr.de/)**: Simulation of Urban Mobility - traffic simulation platform
-- **[Ultralytics YOLOv8](https://ultralytics.com/)**: State-of-the-art object detection
-- **[Stable Baselines3](https://stable-baselines3.readthedocs.io/)**: Reinforcement learning algorithms
-- **[Three.js](https://threejs.org/)**: 3D graphics library for web visualization
-- **[Flask](https://flask.palletsprojects.com/)**: Web framework for dashboard and APIs
-
-### 🌟 Research & Inspiration
-- **OpenAI**: Advancing AI research and reinforcement learning
-- **Computer Vision Community**: YOLO, OpenCV, and detection algorithm researchers
-- **Traffic Engineering**: ITS (Intelligent Transportation Systems) research community
-- **Open Source Community**: Contributors and maintainers of core dependencies
-
-## 📞 Support & Community
-
-### 🆘 Getting Help
-- 📖 **Documentation**: Check guides in this repository first
-- 🐛 **Issues**: [GitHub Issues](https://github.com/sankalpgaonkar/AI-Traffic-Management-System/issues) for bugs and feature requests
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/sankalpgaonkar/AI-Traffic-Management-System/discussions) for questions and ideas
-- 📧 **Author**: [Sankalp Gaonkar](https://github.com/sankalpgaonkar)
-
-### 👤 Author & Ownership
-- **Lead Developer & Maintainer**: **Sankalp Gaonkar**
-- **GitHub**: [@sankalpgaonkar](https://github.com/sankalpgaonkar)
-- **License**: MIT License (see [LICENSE](LICENSE))
-
-### 🌐 Community Resources
-- **Example Projects**: See `examples/` directory for implementation samples
-- **Video Tutorials**: Coming soon - subscribe to releases for updates
-- **Research Papers**: Links to relevant academic research in `docs/research.md`
-- **Conference Talks**: Presentation materials and recordings
-
-### 🚀 Professional Support
-For enterprise deployments, custom development, or consulting:
-- **Custom Training**: AI model training for specific intersections
-- **Integration Services**: Connect with existing traffic management systems
-- **Performance Optimization**: High-throughput deployments and scaling
-- **Technical Consulting**: Traffic engineering and AI implementation guidance
+**EVP·Sim** eliminates specialized hardware by leveraging **standard intersection CCTV cameras**:
+1. **Dual-Model Vision Engine:** Runs Ultralytics YOLOv8n with ByteTrack for ordinary traffic counting alongside custom fine-tuned emergency vehicle detectors (`ambulance`, `fire brigade`, `police`).
+2. **Temporal Confirmation Rule:** Prevents transient false alarms (e.g. delivery vans, glare) from triggering disruptive green signals using a 5-frame persistence gate.
+3. **Safety-Guaranteed Signal Controller:** Enforces mandatory clearance transitions (3s Yellow + 2s All-Red) before serving emergency traffic, with support for green extensions and multi-EV priority queues.
+4. **Synchronized Microscopic Traffic Simulator:** Integrates the Intelligent Driver Model (IDM) and rescue-lane passing behaviors, running preemption and fixed-time control back-to-back on identical vehicle arrivals to measure exact travel-time savings.
 
 ---
 
+## ✨ Key Capabilities
+
+| Component | Technical Implementation |
+|---|---|
+| **Vision & Tracking** | Dual YOLOv8n pipeline (`15 fps` analysis): COCO vehicle detector with ByteTrack tracking + Custom EV detector with nested-box suppression. |
+| **False-Alarm Mitigation** | Causal state machine: `CANDIDATE` (raw) $\rightarrow$ `SUSPECTED` (amber, conf $\ge 0.35$) $\rightarrow$ `CONFIRMED` (red, 5 consecutive frames at conf $\ge 0.50$). |
+| **Fail-Safe Preemption** | Conflict-free state machine with green extension, 3s yellow clearance, 2s all-red clearance, emergency green hold, and recovery cycle. |
+| **Microscopic Simulation** | 4-approach junction simulation with Intelligent Driver Model (IDM) car-following, left-hand traffic (India-ready), and rescue-lane yielding. |
+| **Live Comparative Analytics** | Direct side-by-side comparison of Preemption vs. Fixed-Time: EV response time, delay saved, vehicle queue discharge, and cross-street penalty. |
+| **Zero External Simulation Deps** | Self-contained Python/HTML5 engine—runs in any browser without requiring external SUMO or Unity installations. |
+
+---
+
+## 📸 Visual Walkthrough
+
+### 1. Ingestion & Dual-Model Detection
+As video frames stream in, ordinary vehicles are tracked with persistent ByteTrack IDs (green boxes), while emergency vehicles are filtered through spatial containment checks to prevent double-counting.
+
 <div align="center">
-
-### 🌟 **Building Smarter Cities with AI** 🌟
-
-**Real-time Traffic Optimization • Emergency Vehicle Priority • 3D Visualization • Open Source**
-
-[⭐ Star this Repository](https://github.com/sankalpgaonkar/AI-Traffic-Management-System) • [🔄 Fork & Contribute](https://github.com/sankalpgaonkar/AI-Traffic-Management-System/fork) • [📋 Report Issues](https://github.com/sankalpgaonkar/AI-Traffic-Management-System/issues) • [💡 Request Features](https://github.com/sankalpgaonkar/AI-Traffic-Management-System/issues/new)
-
-**Created & Maintained with ❤️ by [Sankalp Gaonkar](https://github.com/sankalpgaonkar)**
-
+  <img src="docs/screenshots/02_processing.png" alt="Detection in Progress" width="80%">
+  <p><em>Real-time frame processing showing COCO vehicle tracking and confidence extraction.</em></p>
 </div>
-# Emergency_Vehicle_Premption
+
+---
+
+### 2. Temporal Confirmation & Clearance Sequence
+When an emergency vehicle is detected, the confidence persistence state machine verifies stability before changing the signal phase.
+
+<div align="center">
+  <img src="docs/figures/confirmation_states.png" alt="Confirmation Rule State Machine" width="70%">
+  <br><br>
+  <img src="docs/screenshots/02b_confirmed_clearance.png" alt="Preemption Clearance" width="80%">
+  <p><em>At t ≈ 3.1s, the fire truck is CONFIRMED. The conflicting approaches safely enter Yellow → All-Red clearance.</em></p>
+</div>
+
+---
+
+### 3. Preemption Green & Rescue Lane Passage
+The emergency approach receives an exclusive green light. On the junction canvas, queued ordinary vehicles pull over into a rescue lane, allowing the emergency vehicle to overtake the queue up to the stop line.
+
+<div align="center">
+  <img src="docs/screenshots/03_preemption_green.png" alt="Preemption Green" width="80%">
+  <p><em>North approach turned GREEN: Emergency vehicle discharges through cleared queue with zero stopped delay.</em></p>
+</div>
+
+---
+
+### 4. Side-by-Side Performance Comparison
+Every run evaluates identical arrivals twice—once with preemption enabled, and once under standard fixed-time cycle control.
+
+<div align="center">
+  <img src="docs/screenshots/04_results_and_log.png" alt="Results and Comparison" width="80%">
+  <p><em>Performance card showing EV delay (1.9s with preemption vs. 26.0s fixed-time) alongside event log and approach loads.</em></p>
+</div>
+
+---
+
+### 5. Mobile & Responsive Dashboard
+The entire interface is built with vanilla HTML/CSS/JS without external CDN dependencies, running seamlessly across desktop and mobile devices.
+
+<div align="center">
+  <img src="docs/screenshots/06_mobile.png" alt="Mobile Dashboard" width="45%">
+  <p><em>Responsive UI with dark/light themes and instant re-simulation controls.</em></p>
+</div>
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    Video["Approach CCTV Video (Upload / Stream)"] --> Pre["Browser-Ready Transcoding (H.264)"]
+    Pre --> Det["Dual YOLOv8n Inference (15 fps)"]
+    
+    subgraph Vision ["Computer Vision Pipeline"]
+        Det --> COCO["COCO Vehicle Detector + ByteTrack"]
+        Det --> EVDet["Custom EV Detector (Ambulance / Fire / Police)"]
+        COCO --> Dedup["Spatial Deduplication & Tracking"]
+        EVDet --> Dedup
+    end
+    
+    subgraph Decision ["Decision Engine"]
+        Dedup --> Conf["Temporal Confirmation Rule\n(5 consecutive frames >= 0.50)"]
+        Conf --> State["Preemption State Machine\n(Clearance -> Green Hold -> Recovery)"]
+    end
+    
+    subgraph Simulation ["Microscopic Simulation"]
+        State --> SimPre["Simulation (Preemption Enabled)"]
+        State --> SimFix["Simulation (Fixed-Time Baseline)"]
+    end
+    
+    SimPre --> UI["Interactive Web Dashboard (http://127.0.0.1:5050)"]
+    SimFix --> UI
+```
+
+---
+
+## 🧠 Detection Models
+
+The system includes multiple selectable detection models:
+
+| Model Key | Weights File | Architecture | Description |
+|---|---|---|---|
+| **`v2` (Default)** | `project/models/ev_detector_v2_sankalp.pt` | YOLOv8n (3.14M params) | Retrained on clean duplicate-filtered split; lowest false-alarm rate on general photos (20/98). |
+| **`v3`** | `project/models/ev_detector_v3_sankalp.pt` | YOLOv8n (3.14M params) | Trained with 442 additional open images (many Indian roads & "108" ambulances); higher recall on Indian clips. |
+| **`v1`** | `project/models/yolo_emergency_detector.pt` | YOLOv8n | Original 2025 baseline model. |
+| **`v2alt`** | `project/models/ev_detector_v2_alt.pt` | YOLO11n (2.61M params) | YOLO11n comparison architecture. |
+
+### Normalized Confusion Matrix (v2 Clean Split)
+Evaluated on the held-out validation set with zero data leakage:
+
+<div align="center">
+  <img src="training/runs/ev_detector_v2/confusion_matrix_normalized.png" alt="Normalized Confusion Matrix" width="65%">
+  <p><em>Diagonal recall rates: Ambulance 95%, Fire Brigade 86%, Police 91%. Background false positives motivate the 5-frame confirmation gate.</em></p>
+</div>
+
+---
+
+## 🚀 Quick Start
+
+### 1. Prerequisites
+* **Python 3.10 – 3.12**
+* macOS, Linux, or Windows
+
+### 2. One-Click Run
+
+#### macOS / Linux:
+```bash
+git clone https://github.com/sankalpgaonkar/Emergency_Vehicle_Preemption.git
+cd Emergency_Vehicle_Preemption
+./run_mac.sh
+```
+
+#### Windows:
+```cmd
+run_windows.bat
+```
+
+*(The startup script automatically creates `.venv`, installs dependencies from `demo_app/requirements.txt`, and launches the server).*
+
+### 3. Open in Browser
+Navigate to **`http://127.0.0.1:5050`**, pick a sample scenario (e.g. *Toronto — fire truck responding*), and click **Run**. Use **Spacebar** to play/pause.
+
+---
+
+## ☁️ Cloud Deployment (Render / Docker)
+
+The repository is pre-configured for instant zero-configuration deployment to **Render** or any Docker-compatible cloud host:
+
+### Deploy with Docker (Recommended)
+1. Push this repository to your GitHub account.
+2. Sign in to [Render](https://render.com) $\rightarrow$ Click **New +** $\rightarrow$ **Web Service**.
+3. Connect your GitHub repository. Render will automatically detect the [Dockerfile](Dockerfile) and [render.yaml](render.yaml).
+4. Select the **Free** instance tier and click **Deploy**.
+
+The Dockerfile is optimized for lightweight CPU inference:
+* Pre-installs `ffmpeg` and `libgl1`.
+* Uses **CPU-only PyTorch**, reducing container size by 2+ GB and keeping RAM usage well under Render's 512 MB free tier ceiling.
+
+---
+
+## 🧪 Automated Testing
+
+The codebase includes 29 rigorous unit and integration tests verifying safety invariants (no conflicting greens, mandatory clearance yellow/all-red), confirmation rules, simulation mechanics, and API endpoints:
+
+```bash
+# Run test suite
+python -m pytest -v demo_app/tests
+```
+
+```
+demo_app/tests/test_api.py .........          [ 31%]
+demo_app/tests/test_confirm.py .....          [ 48%]
+demo_app/tests/test_controller.py ........    [ 75%]
+demo_app/tests/test_models.py ..              [ 82%]
+demo_app/tests/test_simulation.py .....       [100%]
+
+========================= 29 passed in 4.12s =========================
+```
+
+---
+
+## 📂 Repository Structure
+
+```
+Emergency_Vehicle_Preemption/
+├── demo_app/                     # Interactive EVP web application
+│   ├── app.py                    # Flask server & REST API
+│   ├── core/                     # Core business logic
+│   │   ├── config.py             # System parameters & model registries
+│   │   ├── detector.py           # Dual YOLOv8n inference & ByteTrack wrapper
+│   │   ├── ev_confirm.py         # Multi-frame temporal confirmation logic
+│   │   ├── signal_controller.py  # Safety-enforced preemption state machine
+│   │   ├── simulation.py         # 4-approach microscopic IDM traffic simulator
+│   │   ├── video_io.py           # FFmpeg transcoding & probe helpers
+│   │   └── pipeline.py           # End-to-end background job orchestration
+│   ├── samples/                  # CC-licensed real-world emergency vehicle clips
+│   ├── static/                   # Pure HTML5/CSS3/vanilla JS dashboard
+│   ├── tests/                    # 29 automated safety & logic tests
+│   └── weights/                  # Pre-downloaded YOLOv8n COCO weights
+├── project/
+│   ├── models/                   # Trained EV detector weights (v1, v2, v3, v2alt)
+│   └── datasets/                 # Roboflow emergency vehicle dataset
+├── training/                     # Dataset audit, cleaning & training scripts
+│   ├── dataset_audit.py          # Near-duplicate & source leakage analysis
+│   ├── make_clean_split.py       # Difference-hash & union-find dataset splitter
+│   ├── train_ev_detector.py      # Reproducible YOLOv8 training script
+│   └── runs/                     # Training curves, confusion matrices & metrics
+├── docs/                         # Research paper, methodology PDF, diagrams & screenshots
+├── Dockerfile                    # Container definition for cloud deployment
+├── render.yaml                   # Render Blueprint infrastructure-as-code
+└── run_mac.sh / run_windows.bat  # Instant launcher scripts
+```
+
+---
+
+## 📜 Research & Documentation
+
+Comprehensive research and engineering documentation is provided in the `docs/` folder:
+* **[docs/METHODOLOGY.md](docs/METHODOLOGY.md) / [docs/METHODOLOGY.pdf](docs/METHODOLOGY.pdf):** Full paper write-up detailing dataset audit, mathematical formulation, measured detector latency, and simulated sweep results.
+* **[docs/PROJECT_REVIEW.md](docs/PROJECT_REVIEW.md):** Deep-dive review of v1 vs v2 architectural enhancements and bug fixes.
+* **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):** System architecture specifications and design rationale.
+
+---
+
+## 📄 License & Attribution
+
+* Code is licensed under the [MIT License](LICENSE) &copy; 2026 Sankalp Gaonkar.
+* Model architectures and inference depend on [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) (AGPL-3.0).
+* Training data originated from Roboflow Universe ("Emergency vehicle" v1, CC BY 4.0) with additional open licenses documented in [`docs/data_credits/`](docs/data_credits/).
+* Video samples are from Wikimedia Commons under Creative Commons licenses (see [`demo_app/samples/CREDITS.md`](demo_app/samples/CREDITS.md)).

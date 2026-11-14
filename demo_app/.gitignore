@@ -1,0 +1,4 @@
+data/
+results/jobs/
+__pycache__/
+.pytest_cache/

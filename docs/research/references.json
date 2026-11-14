@@ -1,0 +1,555 @@
+{
+ "generated": "2026-11-03",
+ "note": "Every entry was verified as stated in verified_by; nothing was added from memory without a fetch. Main list = academic and standards references; software_and_data = tools and data to cite or acknowledge. ieee_number matches references.md.",
+ "references": [
+  {
+   "authors": [
+    "E. J. Nelson",
+    "D. Bullock"
+   ],
+   "title": "Impact of Emergency Vehicle Preemption on Signalized Corridor Operation: An Evaluation",
+   "venue": "Transportation Research Record: Journal of the Transportation Research Board",
+   "year": 2000,
+   "volume": "1727",
+   "issue": "1",
+   "pages": "1-11",
+   "article_no": null,
+   "doi": "10.3141/1727-01",
+   "url": "https://doi.org/10.3141/1727-01",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.3141/1727-01 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work + evaluation design: corridor-level impact of EV preemption on travel time/delay; transition algorithms (smooth, add, dwell) and multiple-preemption effects (from abstract).",
+   "ieee_number": 1
+  },
+  {
+   "authors": [
+    "X. Qin",
+    "A. M. Khan"
+   ],
+   "title": "Control strategies of traffic signal timing transition for emergency vehicle preemption",
+   "venue": "Transportation Research Part C: Emerging Technologies",
+   "year": 2012,
+   "volume": "25",
+   "issue": null,
+   "pages": "1-17",
+   "article_no": null,
+   "doi": "10.1016/j.trc.2012.04.004",
+   "url": "https://doi.org/10.1016/j.trc.2012.04.004",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1016/j.trc.2012.04.004 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Methodology (preemption state machine, exit/recovery): control strategies for the signal timing transition around EV preemption.",
+   "ieee_number": 2
+  },
+  {
+   "authors": [
+    "J. Obenberger",
+    "J. Collura"
+   ],
+   "title": "Methodology to Assess Traffic Signal Transition Strategies for Exit Preemption Control",
+   "venue": "Transportation Research Record: Journal of the Transportation Research Board",
+   "year": 2007,
+   "volume": "2035",
+   "issue": "1",
+   "pages": "158-168",
+   "article_no": null,
+   "doi": "10.3141/2035-18",
+   "url": "https://doi.org/10.3141/2035-18",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.3141/2035-18 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Methodology + experiments: exit-preemption transition strategies (best-way, long, short, hold) and their effect on delay; justifies a selectable recovery strategy and a recovery-time metric.",
+   "ieee_number": 3
+  },
+  {
+   "authors": [
+    "J. Xu",
+    "Z. Tian",
+    "A. Wang"
+   ],
+   "title": "Evaluating the Impacts of Different Exit Strategies of Emergency Vehicle Preemption on Arterial Signal Coordination: A Case Study in Reno, Nevada",
+   "venue": "Journal of Transportation Engineering, Part A: Systems",
+   "year": 2023,
+   "volume": "149",
+   "issue": "11",
+   "pages": null,
+   "article_no": "05023007",
+   "doi": "10.1061/JTEPBS.TEENG-7819",
+   "url": "https://doi.org/10.1061/JTEPBS.TEENG-7819",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1061/JTEPBS.TEENG-7819 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work / discussion: impact of different EVP exit strategies on arterial signal coordination (field case study, Reno NV).",
+   "ieee_number": 4
+  },
+  {
+   "authors": [
+    "V. Obrusník",
+    "I. Herman",
+    "Z. Hurák"
+   ],
+   "title": "Queue discharge-based emergency vehicle traffic signal preemption",
+   "venue": "IFAC-PapersOnLine",
+   "year": 2020,
+   "volume": "53",
+   "issue": "2",
+   "pages": "14997-15002",
+   "article_no": null,
+   "doi": "10.1016/j.ifacol.2020.12.1998",
+   "url": "https://doi.org/10.1016/j.ifacol.2020.12.1998",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1016/j.ifacol.2020.12.1998 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Methodology / future work: start preemption early enough to discharge the queue ahead of the EV (queue-discharge-based preemption).",
+   "ieee_number": 5
+  },
+  {
+   "authors": [
+    "W. Yu",
+    "W. Bai",
+    "W. Luan",
+    "L. Qi"
+   ],
+   "title": "State-of-the-Art Review on Traffic Control Strategies for Emergency Vehicles",
+   "venue": "IEEE Access",
+   "year": 2022,
+   "volume": "10",
+   "issue": null,
+   "pages": "109729-109742",
+   "article_no": null,
+   "doi": "10.1109/ACCESS.2022.3213798",
+   "url": "https://doi.org/10.1109/ACCESS.2022.3213798",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/ACCESS.2022.3213798 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Introduction + related work: review of traffic control strategies for emergency vehicles (preemption, routing, RL).",
+   "ieee_number": 6
+  },
+  {
+   "authors": [
+    "U.S. Department of Transportation, Federal Highway Administration"
+   ],
+   "title": "Manual on Uniform Traffic Control Devices for Streets and Highways, 11th Edition (Part 4, Sections 4F.18 \"Preemption and Priority Control of Traffic Control Signals – General\" and 4F.19 \"Preemption Control of Traffic Control Signals\")",
+   "venue": "FHWA, Washington, DC",
+   "year": 2023,
+   "volume": null,
+   "issue": null,
+   "pages": "709–711 (Part 4 PDF)",
+   "article_no": null,
+   "doi": null,
+   "url": "https://mutcd.fhwa.dot.gov/pdfs/11th_Edition/part4.pdf",
+   "type": "standard",
+   "verified_by": "Fetched the Part 4 PDF from mutcd.fhwa.dot.gov (2026-11-03); text of Sections 4F.18–4F.19 read: yellow change and red clearance shall not be shortened or omitted on the transition into, during, or out of preemption; no steady-yellow-to-green sequence; recommended priority order train, boat, heavy vehicle (fire, EMS), light vehicle (law enforcement); page footer \"December 2023, MUTCD 11th Edition\".",
+   "use_for": "Methodology (preemption logic): safety constraints on clearance intervals and the multi-EV priority order (fire/ambulance before police).",
+   "ieee_number": 7
+  },
+  {
+   "authors": [
+    "U.S. Department of Transportation, ITS Joint Program Office / Federal Highway Administration"
+   ],
+   "title": "Traffic Signal Preemption for Emergency Vehicles: A Cross-Cutting Study — Putting the \"First\" in \"First Response\"",
+   "venue": "Report FHWA-JPO-05-010, U.S. DOT, Washington, DC",
+   "year": 2006,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "article_no": null,
+   "doi": null,
+   "url": "https://ntlrepository.blob.core.windows.net/lib/jpodocs/repts_te/14097.htm",
+   "type": "report",
+   "verified_by": "Fetched the ITS report landing page (title and \"January 2006\" shown) at the URL (2026-11-03); report number FHWA-JPO-05-010 taken from its citation in FHWA-HOP-24-019 (PDF fetched from ops.fhwa.dot.gov the same day). The rosap.ntl.bts.gov record (dot/3655) refused automated access (HTTP 403).",
+   "use_for": "Introduction / motivation: practitioner overview of EV preemption deployment issues and benefits (cite only for general context; full report not read).",
+   "ieee_number": 8
+  },
+  {
+   "authors": [
+    "T. Urbanik",
+    "A. Tanaka",
+    "B. Lozner",
+    "E. Lindstrom",
+    "K. Lee",
+    "S. Quayle",
+    "S. Beaird",
+    "S. Tsoi",
+    "P. Ryus",
+    "D. Gettman",
+    "S. Sunkari",
+    "K. Balke",
+    "D. Bullock",
+    "National Cooperative Highway Research Program",
+    "Transportation Research Board",
+    "National Academies of Sciences, Engineering, and Medicine"
+   ],
+   "title": "Signal Timing Manual - Second Edition",
+   "venue": "Transportation Research Board (National Academies Press), NCHRP Report 812",
+   "year": 2015,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "article_no": null,
+   "doi": "10.17226/22097",
+   "url": "https://doi.org/10.17226/22097",
+   "type": "report",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.17226/22097 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Methodology / background: signal timing fundamentals (cycle, clearance intervals, preemption) — Signal Timing Manual, 2nd ed. (NCHRP Report 812).",
+   "ieee_number": 9
+  },
+  {
+   "authors": [
+    "F. V. Webster"
+   ],
+   "title": "Traffic signal settings",
+   "venue": "Road Research Technical Paper No. 39, Road Research Laboratory, HMSO, London",
+   "year": 1958,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "article_no": null,
+   "doi": null,
+   "url": "https://trid.trb.org/View/113579",
+   "type": "report",
+   "verified_by": "Fetched TRID record 113579 (2026-11-03): title \"Traffic Signal Settings\", author Webster, F V, 1958, serial Road Research Lab Tech Papers (UK); abstract describes the delay formula and optimum cycle length. Paper number 39 is the commonly cited number and is not shown on the TRID page. Series number \"Road Research Technical Paper No. 39\" corroborated by search results showing it in published citations (e.g., Gazis, Springer chapter 10.1007/0-306-48217-7_3; Ohno 1973, ScienceDirect) on 2026-11-03.",
+   "use_for": "Methodology / baseline: Webster optimum cycle C0 = (1.5L + 5)/(1 − Y) and delay model for the fixed-time baseline in the simulation.",
+   "ieee_number": 10
+  },
+  {
+   "authors": [
+    "P. A. Lopez",
+    "E. Wiessner",
+    "M. Behrisch",
+    "L. Bieker-Walz",
+    "J. Erdmann",
+    "Y.-P. Flotterod",
+    "R. Hilbrich",
+    "L. Lucken",
+    "J. Rummel",
+    "P. Wagner"
+   ],
+   "title": "Microscopic Traffic Simulation using SUMO",
+   "venue": "Proc. 21st Int. Conf. Intelligent Transportation Systems (ITSC), IEEE",
+   "year": 2018,
+   "volume": null,
+   "issue": null,
+   "pages": "2575-2582",
+   "article_no": null,
+   "doi": "10.1109/ITSC.2018.8569938",
+   "url": "https://doi.org/10.1109/ITSC.2018.8569938",
+   "type": "proceedings-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/ITSC.2018.8569938 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Experimental setup: SUMO microscopic simulator used for the PPO junction and any SUMO EV experiments.",
+   "ieee_number": 11
+  },
+  {
+   "authors": [
+    "L. Bieker-Walz",
+    "M. Behrisch"
+   ],
+   "title": "Modelling green waves for emergency vehicles using connected traffic data",
+   "venue": "SUMO User Conference 2019, EPiC Series in Computing",
+   "year": 2019,
+   "volume": "62",
+   "issue": null,
+   "pages": "10–20",
+   "article_no": null,
+   "doi": "10.29007/sj1m",
+   "url": "https://doi.org/10.29007/sj1m",
+   "type": "proceedings-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.29007/sj1m returned HTTP 200 with matching title (read 2026-11-03); Crossref lacks the year and gives malformed pages, so year 2019 and pages 10–20 were read from the EasyChair landing page reached via doi.org (2026-11-03).",
+   "use_for": "Related work / future work: green waves for EVs across several junctions in SUMO using connected traffic data.",
+   "ieee_number": 12
+  },
+  {
+   "authors": [
+    "M. Treiber",
+    "A. Hennecke",
+    "D. Helbing"
+   ],
+   "title": "Congested traffic states in empirical observations and microscopic simulations",
+   "venue": "Physical Review E",
+   "year": 2000,
+   "volume": "62",
+   "issue": "2",
+   "pages": "1805-1824",
+   "article_no": null,
+   "doi": "10.1103/PhysRevE.62.1805",
+   "url": "https://doi.org/10.1103/PhysRevE.62.1805",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1103/PhysRevE.62.1805 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Implementation (simulation): Intelligent Driver Model car-following used to move vehicles in the canvas intersection so queues form and discharge realistically.",
+   "ieee_number": 13
+  },
+  {
+   "authors": [
+    "J. Redmon",
+    "S. Divvala",
+    "R. Girshick",
+    "A. Farhadi"
+   ],
+   "title": "You Only Look Once: Unified, Real-Time Object Detection",
+   "venue": "Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR)",
+   "year": 2016,
+   "volume": null,
+   "issue": null,
+   "pages": "779-788",
+   "article_no": null,
+   "doi": "10.1109/CVPR.2016.91",
+   "url": "https://doi.org/10.1109/CVPR.2016.91",
+   "type": "proceedings-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/CVPR.2016.91 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work / methodology: original single-stage YOLO detector.",
+   "ieee_number": 14
+  },
+  {
+   "authors": [
+    "G. Jocher",
+    "J. Qiu",
+    "A. Chaurasia"
+   ],
+   "title": "Ultralytics YOLO (version 8.0.0)",
+   "venue": "Software, GitHub repository, AGPL-3.0",
+   "year": 2023,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "article_no": null,
+   "doi": null,
+   "url": "https://github.com/ultralytics/ultralytics",
+   "type": "software",
+   "verified_by": "Fetched CITATION.cff from the ultralytics/ultralytics repository (2026-11-03): title \"Ultralytics YOLO\", authors Jocher, Qiu, Chaurasia, version 8.0.0, date-released 2023-01-10, license AGPL-3.0; GitHub API shows licence AGPL-3.0.",
+   "use_for": "Implementation: YOLOv8n training/inference framework for the EV detector and COCO vehicle counter; licence note (AGPL-3.0).",
+   "ieee_number": 15
+  },
+  {
+   "authors": [
+    "Y. Zhang",
+    "P. Sun",
+    "Y. Jiang",
+    "D. Yu",
+    "F. Weng",
+    "Z. Yuan",
+    "P. Luo",
+    "W. Liu",
+    "X. Wang"
+   ],
+   "title": "ByteTrack: Multi-object Tracking by Associating Every Detection Box",
+   "venue": "Computer Vision – ECCV 2022, Lecture Notes in Computer Science, Springer",
+   "year": 2022,
+   "volume": null,
+   "issue": null,
+   "pages": "1-21",
+   "article_no": null,
+   "doi": "10.1007/978-3-031-20047-2_1",
+   "url": "https://doi.org/10.1007/978-3-031-20047-2_1",
+   "type": "book-chapter",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1007/978-3-031-20047-2_1 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Implementation / future work: multi-object tracking (as in Ultralytics model.track) to count each vehicle once and to require persistence of one tracked EV across frames.",
+   "ieee_number": 16
+  },
+  {
+   "authors": [
+    "M. Lamrabet",
+    "M. A. Chentoufi",
+    "R. Ellaia"
+   ],
+   "title": "Emergency-Aware Adaptive Traffic Signal Control Using YOLO-Based Light-Bar Detection and SUMO System-Level Validation",
+   "venue": "IEEE Access",
+   "year": 2026,
+   "volume": "14",
+   "issue": null,
+   "pages": "104922-104933",
+   "article_no": null,
+   "doi": "10.1109/ACCESS.2026.3710015",
+   "url": "https://doi.org/10.1109/ACCESS.2026.3710015",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/ACCESS.2026.3710015 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work (closest to this project): YOLO light-bar EV detection driving adaptive signal control, validated in SUMO.",
+   "ieee_number": 17
+  },
+  {
+   "authors": [
+    "A. Ibraheem",
+    "A. Asiri",
+    "B. Asiri",
+    "H. Alhefzi"
+   ],
+   "title": "Intelligent Traffic Light Control System for Emergency Vehicles Using Deep Learning and Signal Synchronization",
+   "venue": "IEEE Access",
+   "year": 2025,
+   "volume": "13",
+   "issue": null,
+   "pages": "211832-211844",
+   "article_no": null,
+   "doi": "10.1109/ACCESS.2025.3644805",
+   "url": "https://doi.org/10.1109/ACCESS.2025.3644805",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/ACCESS.2025.3644805 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work: deep-learning EV detection combined with traffic-light control and signal synchronization.",
+   "ieee_number": 18
+  },
+  {
+   "authors": [
+    "V.-T. Tran",
+    "W.-H. Tsai"
+   ],
+   "title": "Acoustic-Based Emergency Vehicle Detection Using Convolutional Neural Networks",
+   "venue": "IEEE Access",
+   "year": 2020,
+   "volume": "8",
+   "issue": null,
+   "pages": "75702-75713",
+   "article_no": null,
+   "doi": "10.1109/ACCESS.2020.2988986",
+   "url": "https://doi.org/10.1109/ACCESS.2020.2988986",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/ACCESS.2020.2988986 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work / future work: CNN-based acoustic (siren) EV detection.",
+   "ieee_number": 19
+  },
+  {
+   "authors": [
+    "V.-T. Tran",
+    "W.-H. Tsai"
+   ],
+   "title": "Audio-Vision Emergency Vehicle Detection",
+   "venue": "IEEE Sensors Journal",
+   "year": 2021,
+   "volume": "21",
+   "issue": "24",
+   "pages": "27905-27917",
+   "article_no": null,
+   "doi": "10.1109/JSEN.2021.3127893",
+   "url": "https://doi.org/10.1109/JSEN.2021.3127893",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/JSEN.2021.3127893 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work / future work: fusing audio and vision for EV detection (argument for a second evidence channel to cut false activations).",
+   "ieee_number": 20
+  },
+  {
+   "authors": [
+    "L. Marchegiani",
+    "P. Newman"
+   ],
+   "title": "Listening for Sirens: Locating and Classifying Acoustic Alarms in City Scenes",
+   "venue": "IEEE Transactions on Intelligent Transportation Systems",
+   "year": 2022,
+   "volume": "23",
+   "issue": "10",
+   "pages": "17087-17096",
+   "article_no": null,
+   "doi": "10.1109/TITS.2022.3158076",
+   "url": "https://doi.org/10.1109/TITS.2022.3158076",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/TITS.2022.3158076 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work / future work: locating and classifying sirens in city scenes (direction of approach from audio).",
+   "ieee_number": 21
+  },
+  {
+   "authors": [
+    "H. Su",
+    "Y. D. Zhong",
+    "J. Y. J. Chow",
+    "B. Dey",
+    "L. Jin"
+   ],
+   "title": "EMVLight: A multi-agent reinforcement learning framework for an emergency vehicle decentralized routing and traffic signal control system",
+   "venue": "Transportation Research Part C: Emerging Technologies",
+   "year": 2023,
+   "volume": "146",
+   "issue": null,
+   "pages": null,
+   "article_no": "103955",
+   "doi": "10.1016/j.trc.2022.103955",
+   "url": "https://doi.org/10.1016/j.trc.2022.103955",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1016/j.trc.2022.103955 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work (RL + EV priority): multi-agent RL for EV routing and decentralized signal control.",
+   "ieee_number": 22
+  },
+  {
+   "authors": [
+    "M. Cao",
+    "V. O. K. Li",
+    "Q. Shuai"
+   ],
+   "title": "A Gain With No Pain: Exploring Intelligent Traffic Signal Control for Emergency Vehicles",
+   "venue": "IEEE Transactions on Intelligent Transportation Systems",
+   "year": 2022,
+   "volume": "23",
+   "issue": "10",
+   "pages": "17899-17909",
+   "article_no": null,
+   "doi": "10.1109/TITS.2022.3159714",
+   "url": "https://doi.org/10.1109/TITS.2022.3159714",
+   "type": "journal-article",
+   "verified_by": "Crossref API https://api.crossref.org/works/10.1109/TITS.2022.3159714 returned HTTP 200 with matching title (read 2026-11-03)",
+   "use_for": "Related work (RL + EV priority): RL signal control that serves EVs while limiting the penalty to general traffic.",
+   "ieee_number": 23
+  },
+  {
+   "authors": [
+    "J. Schulman",
+    "F. Wolski",
+    "P. Dhariwal",
+    "A. Radford",
+    "O. Klimov"
+   ],
+   "title": "Proximal policy optimization algorithms",
+   "venue": "arXiv preprint arXiv:1707.06347",
+   "year": 2017,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "article_no": null,
+   "doi": "10.48550/arXiv.1707.06347",
+   "url": "https://arxiv.org/abs/1707.06347",
+   "type": "preprint",
+   "verified_by": "arXiv API query id_list=1707.06347 returned title \"Proximal Policy Optimization Algorithms\" and the five authors, published 2017-07-20 (2026-11-03).",
+   "use_for": "Methodology (RL agent): PPO algorithm used for the SUMO signal agent.",
+   "ieee_number": 24
+  },
+  {
+   "authors": [
+    "A. Raffin",
+    "A. Hill",
+    "A. Gleave",
+    "A. Kanervisto",
+    "M. Ernestus",
+    "N. Dormann"
+   ],
+   "title": "Stable-Baselines3: Reliable reinforcement learning implementations",
+   "venue": "Journal of Machine Learning Research",
+   "year": 2021,
+   "volume": "22",
+   "issue": "268",
+   "pages": "1–8",
+   "article_no": null,
+   "doi": null,
+   "url": "https://jmlr.org/papers/v22/20-1364.html",
+   "type": "journal-article",
+   "verified_by": "Fetched the JMLR paper page (2026-11-03): title, six authors, \"22(268):1−8, 2021\".",
+   "use_for": "Implementation (RL agent): PPO implementation library used for training.",
+   "ieee_number": 25
+  }
+ ],
+ "software_and_data": [
+  {
+   "authors": [
+    "L. N. Alegre"
+   ],
+   "title": "SUMO-RL",
+   "venue": "GitHub repository, MIT licence",
+   "year": 2019,
+   "url": "https://github.com/LucasAlegre/sumo-rl",
+   "type": "software",
+   "verified_by": "Fetched the repository README citation block (author Lucas N. Alegre, year 2019) and the GitHub API (licence MIT, 1,099 stars) on 2026-11-03.",
+   "use_for": "Implementation (RL agent): Gymnasium environment wrapping SUMO used by the PPO agent."
+  },
+  {
+   "authors": [
+    "Roboflow user \"jd-s39ap\""
+   ],
+   "title": "Emergency vehicle (emergency-vehicle-crigt), version 1",
+   "venue": "Roboflow Universe dataset, CC BY 4.0",
+   "year": 2025,
+   "url": "https://universe.roboflow.com/jd-s39ap/emergency-vehicle-crigt/dataset/1",
+   "type": "dataset",
+   "verified_by": "Read from the dataset export files in the project repo (README.dataset.txt: \"Emergency vehicle > 2025-02-22 7:52pm\", \"License: CC BY 4.0\"; data.yaml: 3 classes ambulance, fire brigade, police, version 1). The Roboflow page itself returned a bot-check (HTTP 403) on 2026-11-03, so it was not read directly.",
+   "use_for": "Experimental setup: training/validation data for the 3-class EV detector; CC BY 4.0 requires attribution."
+  }
+ ]
+}

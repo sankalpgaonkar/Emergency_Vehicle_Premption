@@ -1,0 +1,149 @@
+{
+ "created": "2026-11-03 09:18:46",
+ "models": {
+  "yolo_emergency_detector": {
+   "clean_test": {
+    "mAP50": 0.995,
+    "mAP50_95": 0.739,
+    "precision": 0.96,
+    "recall": 0.987,
+    "per_class": {
+     "ambulance": {
+      "precision": 1.0,
+      "recall": 0.975,
+      "mAP50": 0.995,
+      "mAP50_95": 0.725
+     },
+     "fire brigade": {
+      "precision": 0.881,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.745
+     },
+     "police": {
+      "precision": 0.998,
+      "recall": 0.987,
+      "mAP50": 0.995,
+      "mAP50_95": 0.749
+     }
+    },
+    "images": null
+   },
+   "clean_val": {
+    "mAP50": 0.983,
+    "mAP50_95": 0.73,
+    "precision": 0.97,
+    "recall": 0.968,
+    "per_class": {
+     "ambulance": {
+      "precision": 0.999,
+      "recall": 0.965,
+      "mAP50": 0.986,
+      "mAP50_95": 0.727
+     },
+     "fire brigade": {
+      "precision": 0.938,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.753
+     },
+     "police": {
+      "precision": 0.974,
+      "recall": 0.94,
+      "mAP50": 0.968,
+      "mAP50_95": 0.709
+     }
+    },
+    "images": null
+   },
+   "original_test": {
+    "mAP50": 0.995,
+    "mAP50_95": 0.61,
+    "precision": 0.81,
+    "recall": 0.98,
+    "per_class": {
+     "ambulance": {
+      "precision": 0.981,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.664
+     },
+     "fire brigade": {
+      "precision": 0.448,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.497
+     },
+     "police": {
+      "precision": 1.0,
+      "recall": 0.939,
+      "mAP50": 0.994,
+      "mAP50_95": 0.669
+     }
+    },
+    "images": null
+   },
+   "external": {
+    "conf>=0.25": {
+     "ambulance": {
+      "hits": 35,
+      "of": 44,
+      "rate": 0.795
+     },
+     "fire brigade": {
+      "hits": 9,
+      "of": 10,
+      "rate": 0.9
+     },
+     "any_ev_on_positives": {
+      "hits": 51,
+      "of": 54,
+      "rate": 0.944
+     },
+     "false_alarm_on_negatives": {
+      "hits": 63,
+      "of": 98,
+      "rate": 0.643
+     },
+     "misclass_on_positives": {
+      "hits": 7,
+      "of": 54,
+      "rate": 0.13
+     }
+    },
+    "conf>=0.5": {
+     "ambulance": {
+      "hits": 27,
+      "of": 44,
+      "rate": 0.614
+     },
+     "fire brigade": {
+      "hits": 7,
+      "of": 10,
+      "rate": 0.7
+     },
+     "any_ev_on_positives": {
+      "hits": 43,
+      "of": 54,
+      "rate": 0.796
+     },
+     "false_alarm_on_negatives": {
+      "hits": 30,
+      "of": 98,
+      "rate": 0.306
+     },
+     "misclass_on_positives": {
+      "hits": 9,
+      "of": 54,
+      "rate": 0.167
+     }
+    }
+   },
+   "latency": {
+    "median_ms": 26.34,
+    "p95_ms": 28.0,
+    "threads": 4
+   }
+  }
+ }
+}

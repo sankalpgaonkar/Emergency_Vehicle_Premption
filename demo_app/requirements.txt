@@ -1,0 +1,8 @@
+# EVP demo v2 — Python dependencies (install with: pip install -r demo_app/requirements.txt)
+ultralytics>=8.3          # YOLOv8 inference/tracking/training (AGPL-3.0); pulls in torch, torchvision, opencv-python
+flask>=3.0                # web server (BSD-3-Clause)
+imageio-ffmpeg>=0.5       # bundled ffmpeg binary, so no separate ffmpeg install is needed (BSD-2-Clause)
+lap>=0.5.12               # linear assignment used by ByteTrack
+numpy
+pillow
+pytest>=7                 # tests (optional)

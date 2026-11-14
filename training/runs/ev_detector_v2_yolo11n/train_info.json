@@ -1,0 +1,16 @@
+{
+ "train_seconds": 5292.8,
+ "args": {
+  "data": "datasets_clean/data.yaml",
+  "weights": "training/yolo11n.pt",
+  "epochs": 100,
+  "imgsz": 640,
+  "batch": 16,
+  "device": "cpu",
+  "project": "training/runs",
+  "name": "ev_detector_v2_yolo11n",
+  "patience": 25
+ },
+ "machine": "Linux-6.1.158+-x86_64-with-glibc2.36",
+ "processor": ""
+}

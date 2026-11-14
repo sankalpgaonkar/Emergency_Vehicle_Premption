@@ -1,0 +1,244 @@
+<!doctype html>
+<!-- Copyright (c) 2026 Sankalp Gaonkar. EVP demo v2 frontend. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EVP·Sim — AI Emergency-Vehicle Signal Preemption</title>
+<link rel="stylesheet" href="/static/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a'/%3E%3Ccircle cx='16' cy='9' r='4' fill='%23ef4444'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23f59e0b'/%3E%3Ccircle cx='16' cy='23' r='4' fill='%2322c55e'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true"><i class="l r"></i><i class="l y"></i><i class="l g"></i></div>
+    <div>
+      <div class="brand-title">EVP·Sim</div>
+      <div class="brand-sub">AI emergency-vehicle detection &amp; traffic-signal preemption</div>
+    </div>
+  </div>
+  <ol class="steps" aria-label="Progress">
+    <li id="st1" class="active"><b>1</b> Upload video</li>
+    <li id="st2"><b>2</b> Detect vehicles</li>
+    <li id="st3"><b>3</b> Simulate intersection</li>
+  </ol>
+  <div class="top-actions">
+    <span class="chip" id="modelChip" title="Detection model in use">Model: …</span>
+    <button class="btn ghost" id="newBtn" hidden>New video</button>
+    <button class="btn icon" id="themeBtn" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============ START ============ -->
+  <section id="start" class="view">
+    <div class="hero">
+      <h1>Upload a traffic video. Watch the signal give way to the ambulance.</h1>
+      <p>Your trained detector finds every vehicle and emergency vehicle in the video. The same vehicles then drive
+        through a four-way intersection simulation, and the signals switch the moment an emergency vehicle is
+        <em>confirmed</em>, with every change tied to the second of video that caused it.</p>
+    </div>
+    <div class="start-grid">
+      <div class="card upload-card">
+        <h2>1 · Your video</h2>
+        <label id="drop" class="drop" tabindex="0">
+          <input type="file" id="file" accept="video/*,.mp4,.avi,.mov,.mkv,.webm,.m4v,.mpg,.mpeg,.wmv,.ogv" hidden>
+          <div class="drop-icon" aria-hidden="true">⬆</div>
+          <div class="drop-title">Drop a video here or <u>browse</u></div>
+          <div class="drop-hint" id="dropHint">MP4, AVI, MOV, MKV, WEBM … up to 300 MB · first 180 s analysed</div>
+        </label>
+        <div class="form-row">
+          <label for="approachSel">This camera watches the</label>
+          <select id="approachSel">
+            <option value="N" selected>North approach</option>
+            <option value="E">East approach</option>
+            <option value="S">South approach</option>
+            <option value="W">West approach</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="modelSel">Emergency-vehicle model</label>
+          <select id="modelSel"></select>
+        </div>
+        <p id="modelHint" class="fineprint model-hint" hidden></p>
+        <div class="form-row">
+          <label for="initSel">Signal for that approach when the video starts</label>
+          <select id="initSel">
+            <option value="video_red" selected>Red (worst case for the EV)</option>
+            <option value="video_green">Green</option>
+          </select>
+        </div>
+        <p class="fineprint">A single camera normally shows one approach. Its vehicles are placed on the approach you
+          choose; the other three approaches get the same flow by default (change it later with the sliders).</p>
+        <div id="uploadErr" class="alert error" hidden></div>
+      </div>
+      <div class="card">
+        <h2>…or try a sample clip</h2>
+        <div id="samples" class="samples"><div class="muted">Loading samples…</div></div>
+      </div>
+      <div class="card how">
+        <h2>How it decides</h2>
+        <ol class="howlist">
+          <li><b>Detect.</b> Each analysed frame runs two YOLOv8 models: the project's emergency-vehicle model
+            (ambulance / fire brigade / police) and a COCO model for ordinary vehicles.</li>
+          <li><b>Confirm.</b> One confident frame is not enough. An emergency vehicle is <span class="pill sus">SUSPECTED</span>
+            at conf ≥ 0.35 and <span class="pill conf">CONFIRMED</span> only after 5 consecutive frames ≥ 0.50.</li>
+          <li><b>Preempt.</b> On confirmation: conflicting greens go yellow, then all-red, then the EV's approach turns
+            green. After it crosses, signals recover to the normal cycle.</li>
+          <li><b>Compare.</b> The same arrivals are also run under plain fixed-time control, so you can see the EV delay
+            with and without preemption (simulated).</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESSING ============ -->
+  <section id="processing" class="view" hidden>
+    <div class="card proc-card">
+      <div class="proc-head">
+        <div>
+          <h2 id="procName">Processing…</h2>
+          <div class="muted" id="procStage">Starting</div>
+        </div>
+        <div class="proc-pct" id="procPct">0%</div>
+      </div>
+      <div class="bar"><div id="procBar"></div></div>
+      <div class="proc-body">
+        <img id="procPreview" alt="Latest analysed frame with detection boxes" hidden>
+        <div class="proc-stats">
+          <div class="kv"><span>Video time</span><b id="pT">–</b></div>
+          <div class="kv"><span>Vehicles in frame</span><b id="pV">–</b></div>
+          <div class="kv"><span>Max EV confidence</span><b id="pE">–</b></div>
+          <div class="kv"><span>Analysis speed</span><b id="pF">–</b></div>
+        </div>
+      </div>
+      <div id="procErr" class="alert error" hidden></div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section id="dashboard" class="view" hidden>
+    <div class="banner" id="notesBanner" hidden></div>
+    <div class="grid-top">
+      <div class="card media-card">
+        <div class="card-head">
+          <h2>Camera video <span class="tag real">REAL DETECTIONS</span></h2>
+          <div class="seg" role="group" aria-label="Overlay">
+            <button class="on" data-ov="all">Boxes</button><button data-ov="ev">EV only</button><button data-ov="none">Off</button>
+          </div>
+        </div>
+        <div class="stage" id="videoStage">
+          <video id="video" playsinline muted preload="auto"></video>
+          <canvas id="overlay"></canvas>
+          <div class="ended-mask" id="endedMask" hidden>
+            <div><b>Video ended at <span id="endT"></span></b><br>The simulation keeps running with the vehicles it detected.</div>
+          </div>
+        </div>
+        <div class="media-foot" id="videoFoot"></div>
+      </div>
+      <div class="card media-card">
+        <div class="card-head">
+          <h2>Intersection <span class="tag sim">SIMULATED</span></h2>
+          <div class="seg" role="group" aria-label="Control mode">
+            <button class="on" data-mode="preemption">With preemption</button><button data-mode="fixed">Fixed-time only</button>
+          </div>
+        </div>
+        <div class="stage sim-stage"><canvas id="sim"></canvas></div>
+        <div class="legend">
+          <span><i class="lg car"></i>vehicle</span><span><i class="lg dot"></i>seen in video</span>
+          <span><i class="lg ev"></i>emergency vehicle</span><span><i class="lg sus"></i>suspected EV (no preemption)</span>
+          <span><i class="lg brake"></i>braking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card transport">
+      <button class="btn primary" id="playBtn" aria-label="Play">▶ Play</button>
+      <button class="btn ghost" id="restartBtn" title="Back to start">⟲</button>
+      <div class="clock"><span id="tNow">0.0</span><small>s</small> <span class="muted">/ <span id="tEnd">0</span> s</span></div>
+      <div class="phase-now" id="phaseNow">NORMAL CYCLE</div>
+      <label class="speed">Speed
+        <select id="speedSel"><option>0.25</option><option>0.5</option><option selected>1</option><option>2</option><option>4</option></select>×
+      </label>
+    </div>
+
+    <div class="card timeline-card">
+      <div class="card-head">
+        <h2>Timeline <span class="muted small">click to jump · signals per approach, EV confidence, events</span></h2>
+        <div class="tl-legend"><span><i class="sw g"></i>green</span><span><i class="sw y"></i>yellow</span><span><i class="sw r"></i>red</span>
+          <span><i class="sw line"></i>EV confidence</span><span><i class="sw thr"></i>thresholds</span></div>
+      </div>
+      <canvas id="timeline"></canvas>
+    </div>
+
+    <div class="grid-stats">
+      <div class="card stat">
+        <h3>Vehicles detected <span class="tag real">REAL</span></h3>
+        <div id="countsList" class="counts"></div>
+        <div class="muted small" id="countsFoot"></div>
+      </div>
+      <div class="card stat">
+        <h3>Emergency detection <span class="tag real">REAL</span></h3>
+        <canvas id="gauge" width="260" height="150"></canvas>
+        <div class="ev-state"><span class="pill" id="evPill">NONE</span> <span id="evCls" class="muted"></span></div>
+        <div class="muted small" id="evStreak"></div>
+      </div>
+      <div class="card stat">
+        <h3>Approach load <span class="tag sim">SIM</span></h3>
+        <div id="loadBars" class="loadbars"></div>
+        <div class="muted small">vehicles on approach · <span class="q-key"></span> queued (stopped)</div>
+      </div>
+      <div class="card stat">
+        <h3>Preemption result <span class="tag sim">SIM</span></h3>
+        <div id="resultBox"></div>
+      </div>
+    </div>
+
+    <div class="grid-bottom">
+      <div class="card">
+        <div class="card-head"><h2>Event log</h2><a class="btn ghost small" id="csvBtn" href="#" download>Export CSV</a></div>
+        <div id="log" class="log" role="log" aria-live="polite"></div>
+      </div>
+      <div class="card settings">
+        <h2>Scenario controls</h2>
+        <div class="form-row"><label for="sApproach">Video approach</label>
+          <select id="sApproach"><option value="N">North</option><option value="E">East</option><option value="S">South</option><option value="W">West</option></select></div>
+        <div class="form-row"><label for="sInit">Video approach at t = 0</label>
+          <select id="sInit"><option value="video_red">Red</option><option value="video_green">Green</option></select></div>
+        <div id="densRows"></div>
+        <details>
+          <summary>Confirmation rule (avoid false triggers)</summary>
+          <div class="form-row slider"><label>Suspect at conf ≥ <b id="vSus"></b></label><input type="range" id="rSus" min="0.2" max="0.8" step="0.05"></div>
+          <div class="form-row slider"><label>Confirm at conf ≥ <b id="vConf"></b></label><input type="range" id="rConf" min="0.3" max="0.9" step="0.05"></div>
+          <div class="form-row slider"><label>…for <b id="vFr"></b> consecutive frames</label><input type="range" id="rFr" min="1" max="15" step="1"></div>
+        </details>
+        <div class="inject">
+          <div class="muted small">Add a test emergency vehicle at the current time (shows queueing of several EVs):</div>
+          <div class="inj-btns" id="injBtns"></div>
+          <div id="injList" class="muted small"></div>
+        </div>
+        <div class="row-actions"><button class="btn primary" id="rerunBtn">Re-run simulation</button><span id="rerunMsg" class="muted small"></span></div>
+        <details class="assume">
+          <summary>Assumptions (read before quoting numbers)</summary>
+          <ul>
+            <li>Detection counts, confidences and timings are <b>measured</b> from the video by the models.</li>
+            <li>Everything in the intersection panel is <b>simulated</b>: 2 inbound lanes per approach, straight-through
+              traffic, IDM car-following, fixed-time cycle 20 s green / 3 s yellow / 2 s all-red per axis.</li>
+            <li>The camera is assumed to be 90 m upstream of the stop line. Vehicles seen in the first frame start on
+              the approach. Later vehicles enter at the time they first appear.</li>
+            <li>After the video ends, the video approach keeps the observed flow (capped at 30 veh/min).</li>
+            <li>The EV obeys signals in the simulation; a real EV may cross a red with caution.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot">
+  <span>EVP·Sim v2 · Sankalp Gaonkar · NMAMIT</span>
+  <span class="muted">Detection: Ultralytics YOLOv8 (AGPL-3.0) · Dataset: Roboflow “Emergency vehicle” (CC BY 4.0) · Sample clips: Wikimedia Commons (see credits)</span>
+</footer>
+<div class="toast" id="toast" hidden></div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

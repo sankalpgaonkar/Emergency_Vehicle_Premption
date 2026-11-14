@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: evp-traffic-preemption
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+

@@ -1,0 +1,8 @@
+{
+ "label": "v2 \u00b7 YOLOv8n, all images (default)",
+ "arch": "yolov8n",
+ "trained": "2026-11-03",
+ "data": "all 1,065 dataset images (train+val+test of the filtered split)",
+ "run": "training/runs/ev_detector_v2_all_yolov8n",
+ "weights": "last.pt (epoch 100)"
+}

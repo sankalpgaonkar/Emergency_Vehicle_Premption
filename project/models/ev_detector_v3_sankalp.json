@@ -1,0 +1,24 @@
+{
+ "label": "v3 · + Indian images (2026)",
+ "arch": "yolov8n",
+ "trained": "2026-11-03",
+ "data": "original 1,065 Roboflow images + 442 new openly licensed images from EV_Indian_Dataset_v1/train (79-image Indian test split held out)",
+ "settings": "same as v2: COCO yolov8n.pt start, 100 epochs, patience 0, imgsz 640, batch 16, seed 0, deterministic, CPU, Ultralytics 8.4.199",
+ "weights": "last.pt (epoch 100)",
+ "train_seconds": 8797.3,
+ "external_152_conf0.5": {
+  "ambulance": "27/44",
+  "fire_brigade": "8/10",
+  "false_alarms": "26/98",
+  "wrong_class": "7/54"
+ },
+ "indian_test_79_conf0.5": {
+  "ambulance": "7/13",
+  "fire_brigade": "11/13",
+  "police": "11/15",
+  "false_alarms": "11/38",
+  "box_mAP50": 0.684
+ },
+ "clips_confirmed_correct_class": "4/5 (Edinburgh, India, Tokyo, Toronto fire brigade)",
+ "note": "Selectable option, not the app default (v2 stays the default). Data credits: docs/data_credits/."
+}

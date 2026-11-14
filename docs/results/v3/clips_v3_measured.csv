@@ -1,0 +1,6 @@
+model,video,duration_s,ordinary_vehicles,confirmed_EVs,first_confirm_t,confirmed_classes,suspected_only,analysed_fps,ev_ms_median,coco_ms_median
+v3,edinburgh_ambulance_junction.mp4,10.73,21,1,9.02,ambulance,0,10.98,16.75,38.67
+v3,india_ambulance_night.mp4,11.5,19,1,0.28,ambulance,0,27.99,15.81,17.13
+v3,nyc_ambulance_night.mp4,8.13,16,0,,,1,30.61,14.43,15.56
+v3,tokyo_ambulance_intersection.mp4,5.0,34,1,0.27,ambulance,0,30.03,14.03,15.67
+v3,toronto_fire_truck.mp4,9.58,5,1,1.74,fire brigade,0,27.2,16.42,17.49

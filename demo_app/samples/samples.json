@@ -1,0 +1,65 @@
+[
+ {
+  "file": "toronto_fire_truck.mp4",
+  "title": "Toronto — fire truck responding",
+  "note": "Fire engine responding; tests the fire-brigade class.",
+  "credit": "“Toronto Fire responding.webm” by Hillelfrei, Wikimedia Commons",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Toronto_Fire_responding.webm",
+  "source_file": "Toronto Fire responding.webm",
+  "modification": "re-encoded to H.264 MP4, width ≤ 960 px, audio removed"
+ },
+ {
+  "file": "edinburgh_ambulance_junction.mp4",
+  "title": "Edinburgh junction — ambulance arrives late in the clip",
+  "note": "Normal traffic first; the ambulance appears around 8 s. With the default model it stays SUSPECTED (confidence does not stay ≥ 0.50 for 5 frames), which shows the confirmation rule; choose model v1 or v3, or set the rule to 3 frames, to see it confirmed.",
+  "credit": "“Ambulance responding sirens in Edinburgh (2019).webm” by Kevin.B, Wikimedia Commons",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Ambulance_responding_sirens_in_Edinburgh_(2019).webm",
+  "source_file": "Ambulance responding sirens in Edinburgh (2019).webm",
+  "modification": "re-encoded to H.264 MP4, width ≤ 960 px, audio removed"
+ },
+ {
+  "file": "tokyo_ambulance_intersection.mp4",
+  "title": "Tokyo — ambulance at an intersection",
+  "note": "Ambulance in view from the first frame, with cross traffic.",
+  "credit": "“Ambulance - Tokyo area - 2016-9-10.webm” by Nesnad, Wikimedia Commons",
+  "licence": "CC BY 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by/4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Ambulance_-_Tokyo_area_-_2016-9-10.webm",
+  "source_file": "Ambulance - Tokyo area - 2016-9-10.webm",
+  "modification": "re-encoded to H.264 MP4, width ≤ 960 px, audio removed"
+ },
+ {
+  "file": "india_ambulance_night.mp4",
+  "title": "Ambulance on a busy road (night)",
+  "note": "Ambulance on a busy road at night.",
+  "credit": "“Ambulance running on road.webm” by Free Video Library, Wikimedia Commons",
+  "licence": "CC BY 3.0",
+  "licence_url": "https://creativecommons.org/licenses/by/3.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Ambulance_running_on_road.webm",
+  "source_file": "Ambulance running on road.webm",
+  "modification": "re-encoded to H.264 MP4, width ≤ 960 px, audio removed"
+ },
+ {
+  "file": "nyc_ambulance_night.mp4",
+  "title": "New York — ambulance crossing at night",
+  "note": "Ambulance crosses mid-clip at night.",
+  "credit": "“NYC congestion pricing - ambulance crosses after midnight.webm” by Legoktm, Wikimedia Commons",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:NYC_congestion_pricing_-_ambulance_crosses_after_midnight.webm",
+  "source_file": "NYC congestion pricing - ambulance crosses after midnight.webm",
+  "modification": "re-encoded to H.264 MP4, width ≤ 960 px, audio removed"
+ },
+ {
+  "file": "zz_original_placeholder_emergency2.mp4",
+  "title": "Original repo clip (synthetic shapes)",
+  "note": "project/videos/emergency2.mp4: drawn rectangles, not real vehicles. Shows the 'no detections' handling.",
+  "credit": "From the original project repository",
+  "licence": "",
+  "url": ""
+ }
+]

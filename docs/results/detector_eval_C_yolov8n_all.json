@@ -1,0 +1,122 @@
+{
+ "created": "2026-11-03 12:46:51",
+ "models": {
+  "cand_v2_all_yolov8n": {
+   "clean_test": {
+    "mAP50": 0.995,
+    "mAP50_95": 0.825,
+    "precision": 0.973,
+    "recall": 1.0,
+    "per_class": {
+     "ambulance": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.784
+     },
+     "fire brigade": {
+      "precision": 0.921,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.895
+     },
+     "police": {
+      "precision": 0.999,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.794
+     }
+    },
+    "images": null
+   },
+   "clean_val": {
+    "mAP50": 0.989,
+    "mAP50_95": 0.788,
+    "precision": 0.984,
+    "recall": 0.988,
+    "per_class": {
+     "ambulance": {
+      "precision": 0.999,
+      "recall": 0.988,
+      "mAP50": 0.995,
+      "mAP50_95": 0.806
+     },
+     "fire brigade": {
+      "precision": 0.967,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.789
+     },
+     "police": {
+      "precision": 0.986,
+      "recall": 0.975,
+      "mAP50": 0.978,
+      "mAP50_95": 0.768
+     }
+    },
+    "images": null
+   },
+   "external": {
+    "conf>=0.25": {
+     "ambulance": {
+      "hits": 31,
+      "of": 44,
+      "rate": 0.705
+     },
+     "fire brigade": {
+      "hits": 8,
+      "of": 10,
+      "rate": 0.8
+     },
+     "any_ev_on_positives": {
+      "hits": 47,
+      "of": 54,
+      "rate": 0.87
+     },
+     "false_alarm_on_negatives": {
+      "hits": 48,
+      "of": 98,
+      "rate": 0.49
+     },
+     "misclass_on_positives": {
+      "hits": 8,
+      "of": 54,
+      "rate": 0.148
+     }
+    },
+    "conf>=0.5": {
+     "ambulance": {
+      "hits": 29,
+      "of": 44,
+      "rate": 0.659
+     },
+     "fire brigade": {
+      "hits": 6,
+      "of": 10,
+      "rate": 0.6
+     },
+     "any_ev_on_positives": {
+      "hits": 41,
+      "of": 54,
+      "rate": 0.759
+     },
+     "false_alarm_on_negatives": {
+      "hits": 20,
+      "of": 98,
+      "rate": 0.204
+     },
+     "misclass_on_positives": {
+      "hits": 6,
+      "of": 54,
+      "rate": 0.111
+     }
+    }
+   },
+   "latency": {
+    "median_ms": 26.53,
+    "p95_ms": 27.11,
+    "threads": 4
+   }
+  }
+ }
+}

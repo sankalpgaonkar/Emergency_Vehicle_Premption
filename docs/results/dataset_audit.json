@@ -1,0 +1,59 @@
+{
+ "images": 1065,
+ "source_families": {
+  "frame": {
+   "images": 490,
+   "ambulance": 284,
+   "police": 208,
+   "fire brigade": 1
+  },
+  "sjnskj": {
+   "images": 280,
+   "police": 280
+  },
+  "csm-sc": {
+   "images": 230,
+   "ambulance": 230
+  },
+  "(single web images)": {
+   "images": 65,
+   "police": 17,
+   "fire brigade": 15,
+   "ambulance": 34
+  }
+ },
+ "original_split_test_vs_train": {
+  "test_images": 107,
+  "percentiles_bits": {
+   "min": 4.0,
+   "p10": 8.0,
+   "p25": 13.0,
+   "median": 23.0,
+   "p75": 45.5
+  },
+  "within_bits": {
+   "20": 48,
+   "30": 65,
+   "40": 76,
+   "50": 82,
+   "60": 89
+  }
+ },
+ "clean_split_test_vs_train": {
+  "test_images": 160,
+  "percentiles_bits": {
+   "min": 21.0,
+   "p10": 24.9,
+   "p25": 33.0,
+   "median": 61.0,
+   "p75": 88.5
+  },
+  "within_bits": {
+   "20": 0,
+   "30": 34,
+   "40": 50,
+   "50": 65,
+   "60": 80
+  }
+ }
+}

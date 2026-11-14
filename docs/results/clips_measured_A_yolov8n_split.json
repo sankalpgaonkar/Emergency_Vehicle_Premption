@@ -1,0 +1,531 @@
+[
+ {
+  "video": "edinburgh_ambulance_junction.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 10.73,
+   "ordinary_vehicles": 21,
+   "counts": {
+    "car": 16,
+    "bus": 2,
+    "truck": 3
+   },
+   "ev_tracks": [
+    {
+     "tid": 2,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 2.21,
+     "last_t": 3.14,
+     "suspected_t": null,
+     "confirmed_t": null,
+     "confirmed_conf": null,
+     "max_conf": 0.208,
+     "hits": 2,
+     "state": "CANDIDATE",
+     "votes": {
+      "ambulance": 0.42
+     }
+    },
+    {
+     "tid": 3,
+     "cls": "police",
+     "final_cls": "police",
+     "first_t": 8.82,
+     "last_t": 9.76,
+     "suspected_t": 8.82,
+     "confirmed_t": null,
+     "confirmed_conf": null,
+     "max_conf": 0.65,
+     "hits": 6,
+     "state": "SUSPECTED",
+     "votes": {
+      "police": 2.91
+     }
+    }
+   ],
+   "perf": {
+    "frames_analysed": 160,
+    "processing_seconds": 8.22,
+    "analysed_fps": 19.47,
+    "coco_ms_median": 19.44,
+    "ev_ms_median": 16.97,
+    "coco_ms_p95": 35.97,
+    "ev_ms_p95": 23.14,
+    "video_seconds": 10.73,
+    "frame_size": [
+     960,
+     540
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 8.82,
+     "classes": [
+      "police"
+     ]
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 0,
+     "suspected_only": 1,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 0,
+     "suspected_only": 1,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 0,
+     "suspected_only": 1,
+     "first_confirm_t": null,
+     "classes": []
+    }
+   ]
+  }
+ },
+ {
+  "video": "india_ambulance_night.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 11.5,
+   "ordinary_vehicles": 19,
+   "counts": {
+    "car": 16,
+    "bus": 2,
+    "truck": 1,
+    "ambulance": 1
+   },
+   "ev_tracks": [
+    {
+     "tid": 1,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 0.0,
+     "last_t": 11.28,
+     "suspected_t": 0.0,
+     "confirmed_t": 0.28,
+     "confirmed_conf": 0.686,
+     "max_conf": 0.854,
+     "hits": 170,
+     "state": "CONFIRMED",
+     "votes": {
+      "ambulance": 127.02
+     }
+    }
+   ],
+   "perf": {
+    "frames_analysed": 172,
+    "processing_seconds": 7.74,
+    "analysed_fps": 22.22,
+    "coco_ms_median": 19.48,
+    "ev_ms_median": 16.72,
+    "coco_ms_p95": 44.25,
+    "ev_ms_p95": 22.04,
+    "video_seconds": 11.5,
+    "frame_size": [
+     960,
+     540
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 0.0,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 0.14,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 0.28,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 0.48,
+     "classes": [
+      "ambulance"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "video": "nyc_ambulance_night.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 8.13,
+   "ordinary_vehicles": 16,
+   "counts": {
+    "car": 15,
+    "truck": 1
+   },
+   "ev_tracks": [
+    {
+     "tid": 2,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 2.13,
+     "last_t": 3.13,
+     "suspected_t": 3.13,
+     "confirmed_t": null,
+     "confirmed_conf": null,
+     "max_conf": 0.648,
+     "hits": 2,
+     "state": "SUSPECTED",
+     "votes": {
+      "ambulance": 0.92
+     }
+    },
+    {
+     "tid": 4,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 7.0,
+     "last_t": 7.53,
+     "suspected_t": 7.0,
+     "confirmed_t": null,
+     "confirmed_conf": null,
+     "max_conf": 0.541,
+     "hits": 4,
+     "state": "SUSPECTED",
+     "votes": {
+      "ambulance": 1.69
+     }
+    }
+   ],
+   "perf": {
+    "frames_analysed": 122,
+    "processing_seconds": 5.72,
+    "analysed_fps": 21.34,
+    "coco_ms_median": 21.68,
+    "ev_ms_median": 18.56,
+    "coco_ms_p95": 36.24,
+    "ev_ms_p95": 22.43,
+    "video_seconds": 8.13,
+    "frame_size": [
+     960,
+     540
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 2,
+     "suspected_only": 0,
+     "first_confirm_t": 3.13,
+     "classes": [
+      "ambulance",
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 0,
+     "suspected_only": 2,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 0,
+     "suspected_only": 2,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 0,
+     "suspected_only": 2,
+     "first_confirm_t": null,
+     "classes": []
+    }
+   ]
+  }
+ },
+ {
+  "video": "tokyo_ambulance_intersection.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 5.0,
+   "ordinary_vehicles": 34,
+   "counts": {
+    "car": 31,
+    "truck": 3,
+    "ambulance": 1
+   },
+   "ev_tracks": [
+    {
+     "tid": 1,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 0.07,
+     "last_t": 4.94,
+     "suspected_t": 0.07,
+     "confirmed_t": 3.67,
+     "confirmed_conf": 0.823,
+     "max_conf": 0.823,
+     "hits": 47,
+     "state": "CONFIRMED",
+     "votes": {
+      "ambulance": 26.51,
+      "fire brigade": 0.21
+     }
+    },
+    {
+     "tid": 2,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 1.67,
+     "last_t": 3.27,
+     "suspected_t": 2.74,
+     "confirmed_t": null,
+     "confirmed_conf": null,
+     "max_conf": 0.466,
+     "hits": 6,
+     "state": "SUSPECTED",
+     "votes": {
+      "fire brigade": 0.49,
+      "ambulance": 1.19
+     }
+    }
+   ],
+   "perf": {
+    "frames_analysed": 75,
+    "processing_seconds": 3.22,
+    "analysed_fps": 23.32,
+    "coco_ms_median": 18.17,
+    "ev_ms_median": 15.77,
+    "coco_ms_p95": 37.13,
+    "ev_ms_p95": 23.68,
+    "video_seconds": 5.0,
+    "frame_size": [
+     960,
+     540
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 1,
+     "suspected_only": 1,
+     "first_confirm_t": 0.07,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 1,
+     "suspected_only": 1,
+     "first_confirm_t": 3.54,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 1,
+     "suspected_only": 1,
+     "first_confirm_t": 3.67,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 1,
+     "suspected_only": 1,
+     "first_confirm_t": 3.87,
+     "classes": [
+      "ambulance"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "video": "toronto_fire_truck.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 9.58,
+   "ordinary_vehicles": 6,
+   "counts": {
+    "truck": 3,
+    "car": 2,
+    "bus": 1,
+    "ambulance": 1
+   },
+   "ev_tracks": [
+    {
+     "tid": 1,
+     "cls": "ambulance",
+     "final_cls": "ambulance",
+     "first_t": 2.34,
+     "last_t": 4.47,
+     "suspected_t": 2.4,
+     "confirmed_t": 3.8,
+     "confirmed_conf": 0.694,
+     "max_conf": 0.807,
+     "hits": 32,
+     "state": "CONFIRMED",
+     "votes": {
+      "ambulance": 10.66,
+      "fire brigade": 3.63,
+      "police": 2.06
+     }
+    }
+   ],
+   "perf": {
+    "frames_analysed": 143,
+    "processing_seconds": 5.21,
+    "analysed_fps": 27.47,
+    "coco_ms_median": 16.96,
+    "ev_ms_median": 15.28,
+    "coco_ms_p95": 26.44,
+    "ev_ms_p95": 17.91,
+    "video_seconds": 9.58,
+    "frame_size": [
+     960,
+     540
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 2.67,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 3.34,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 3.8,
+     "classes": [
+      "ambulance"
+     ]
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 1,
+     "suspected_only": 0,
+     "first_confirm_t": 4.0,
+     "classes": [
+      "ambulance"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "video": "zz_original_placeholder_emergency2.mp4",
+  "model": "A",
+  "measured": {
+   "duration_s": 5.0,
+   "ordinary_vehicles": 0,
+   "counts": {},
+   "ev_tracks": [],
+   "perf": {
+    "frames_analysed": 75,
+    "processing_seconds": 2.91,
+    "analysed_fps": 25.78,
+    "coco_ms_median": 18.21,
+    "ev_ms_median": 17.69,
+    "coco_ms_p95": 21.51,
+    "ev_ms_p95": 20.98,
+    "video_seconds": 5.0,
+    "frame_size": [
+     832,
+     480
+    ],
+    "ev_model": "v2",
+    "ev_model_file": "ev_detector_v2_sankalp.pt",
+    "torch_threads": 8
+   },
+   "confirmation_sweep": [
+    {
+     "confirm_frames": 1,
+     "confirmed": 0,
+     "suspected_only": 0,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 3,
+     "confirmed": 0,
+     "suspected_only": 0,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 5,
+     "confirmed": 0,
+     "suspected_only": 0,
+     "first_confirm_t": null,
+     "classes": []
+    },
+    {
+     "confirm_frames": 8,
+     "confirmed": 0,
+     "suspected_only": 0,
+     "first_confirm_t": null,
+     "classes": []
+    }
+   ]
+  }
+ }
+]

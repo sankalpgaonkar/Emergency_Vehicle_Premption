@@ -94,3 +94,11 @@ uploads/
 *.key
 *.pem
 .env*
+
+# v2 demo (Nov 2026): model files the demo needs
+!project/models/ev_detector_v2_sankalp.pt
+!project/models/ev_detector_v2_alt.pt
+!project/models/ev_detector_v3_sankalp.pt
+!demo_app/weights/yolov8n.pt
+!training/runs/**/weights/
+!training/runs/**/weights/best.pt
