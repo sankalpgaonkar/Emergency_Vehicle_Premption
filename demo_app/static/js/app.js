@@ -153,8 +153,9 @@ async function poll(id) {
   if (j.live) {
     $("#pT").textContent = fmt(j.live.t) + " s"; $("#pV").textContent = j.live.vehicles;
     $("#pE").textContent = fmt(j.live.ev, 2); $("#pF").textContent = j.live.fps ? j.live.fps + " frames/s" : "–";
-    if (!state.processingSample) {
-      const img = $("#procPreview"); img.hidden = false; img.src = `/api/jobs/${id}/preview.jpg?ts=${Date.now()}`;
+    const img = $("#procPreview"); img.hidden = false; img.src = `/api/jobs/${id}/preview.jpg?ts=${Date.now()}`;
+    if (state.processingSample) {
+      const video = $("#procVideo"); video.pause(); video.hidden = true;
     }
   }
   if (j.status === "error") return failProc(j.error || "Processing failed.");
