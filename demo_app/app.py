@@ -7,6 +7,7 @@ Run:   python demo_app/app.py            (then open http://127.0.0.1:5050)
 """
 import argparse
 import json
+import mimetypes
 import os
 import shutil
 import sys
@@ -75,6 +76,19 @@ def samples():
     return jsonify(out)
 
 
+def _sample_path(name):
+    p = (C.SAMPLES_DIR / name).resolve()
+    if p.parent != C.SAMPLES_DIR.resolve() or not p.is_file() or p.suffix.lower() not in C.ALLOWED_EXT:
+        abort(404)
+    return p
+
+
+@app.route("/api/samples/<name>/video")
+def sample_video(name):
+    p = _sample_path(name)
+    return send_file(p, mimetype=mimetypes.guess_type(p.name)[0] or "application/octet-stream", conditional=True)
+
+
 def _settings_from(form_or_json):
     s = {"sim": {}, "signal": {}}
     g = form_or_json.get
@@ -118,9 +132,7 @@ def upload():
 
 @app.route("/api/samples/<name>/run", methods=["POST"])
 def run_sample(name):
-    p = (C.SAMPLES_DIR / name).resolve()
-    if p.parent != C.SAMPLES_DIR.resolve() or not p.exists():
-        return err("Sample not found.", 404)
+    p = _sample_path(name)
     job = P.new_job(p, name, _settings_from(request.get_json(silent=True) or {}))
     return jsonify({"ok": True, "job": P.public(job)})
 

@@ -87,7 +87,8 @@ python demo_app/app.py --host 127.0.0.1 --port 5050
 
 ## Using the dashboard
 
-1. Choose a bundled sample clip or upload a video.
+1. Choose a bundled sample clip or upload a video. Sample clips start playing
+   while server-side detection and simulation run.
 2. Select the camera approach and initial signal state.
 3. Wait for detection and simulation to finish.
 4. Play the processed video and inspect the signal timeline.

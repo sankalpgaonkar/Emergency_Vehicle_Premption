@@ -10,6 +10,7 @@ const state = {
   cfg: null, job: null, res: null, mode: "preemption", overlay: "all",
   t: 0, playing: false, lastTs: null, speed: 1, vidDur: 0, simDur: 0,
   inject: [], logRows: [], frameTimes: [],
+  processingSample: false,
 };
 
 // ---------------------------------------------------------------- utilities
@@ -90,12 +91,18 @@ async function initStart() {
       $("#samples").appendChild(d);
     });
   } catch (e) { $("#samples").innerHTML = '<div class="muted">Could not load samples.</div>'; }
-  $("#newBtn").onclick = () => { stop(); state.res = null; show("start"); setStep(1); history.replaceState(null, "", "/"); };
+  $("#newBtn").onclick = () => { stop(); clearProcessingVideo(); state.res = null; show("start"); setStep(1); history.replaceState(null, "", "/"); };
+}
+function clearProcessingVideo() {
+  const v = $("#procVideo");
+  v.pause(); v.removeAttribute("src"); v.load(); v.hidden = true;
+  state.processingSample = false;
 }
 function startSettings() {
   return { approach: $("#approachSel").value, initial_state: $("#initSel").value, model: $("#modelSel").value };
 }
 async function upload(f) {
+  clearProcessingVideo();
   $("#uploadErr").hidden = true;
   const ext = "." + (f.name.split(".").pop() || "").toLowerCase();
   if (state.cfg && !state.cfg.allowed_ext.includes(ext)) {
@@ -118,6 +125,11 @@ async function upload(f) {
 async function runSample(file, title) {
   show("processing"); setStep(2); $("#procName").textContent = title; $("#procStage").textContent = "Starting…";
   $("#procErr").hidden = true; $("#procPreview").hidden = true;
+  const video = $("#procVideo");
+  state.processingSample = true;
+  video.src = `/api/samples/${encodeURIComponent(file)}/video`;
+  video.hidden = false; video.load();
+  video.play().catch(() => { });
   try {
     const r = await api(`/api/samples/${encodeURIComponent(file)}/run`, {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(startSettings())
@@ -141,7 +153,9 @@ async function poll(id) {
   if (j.live) {
     $("#pT").textContent = fmt(j.live.t) + " s"; $("#pV").textContent = j.live.vehicles;
     $("#pE").textContent = fmt(j.live.ev, 2); $("#pF").textContent = j.live.fps ? j.live.fps + " frames/s" : "–";
-    const img = $("#procPreview"); img.hidden = false; img.src = `/api/jobs/${id}/preview.jpg?ts=${Date.now()}`;
+    if (!state.processingSample) {
+      const img = $("#procPreview"); img.hidden = false; img.src = `/api/jobs/${id}/preview.jpg?ts=${Date.now()}`;
+    }
   }
   if (j.status === "error") return failProc(j.error || "Processing failed.");
   if (j.status === "done") return loadResult(id);
@@ -152,6 +166,7 @@ async function poll(id) {
 async function loadResult(id) {
   let res;
   try { res = await api(`/api/jobs/${id}/result`); } catch (e) { return failProc(e.message); }
+  clearProcessingVideo();
   state.res = res; state.jobId = id; state.inject = [];
   history.replaceState(null, "", `/?job=${id}`);
   show("dashboard"); setStep(3);

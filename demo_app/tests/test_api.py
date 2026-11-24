@@ -31,6 +31,17 @@ def test_health(client):
     assert h["ok"] and h["ev_model_present"]
 
 
+def test_sample_video_supports_byte_ranges(client):
+    r = client.get("/api/samples/toronto_fire_truck.mp4/video", headers={"Range": "bytes=0-31"})
+    assert r.status_code == 206
+    assert r.headers["Content-Type"].startswith("video/mp4")
+    assert len(r.data) == 32
+
+
+def test_missing_sample_video_returns_404(client):
+    assert client.get("/api/samples/not-a-sample.mp4/video").status_code == 404
+
+
 def test_unsupported_format(client):
     r = client.post("/api/upload", data={"video": (io.BytesIO(b"x" * 5000), "notes.txt")},
                     content_type="multipart/form-data")
