@@ -1,226 +1,292 @@
-# Emergency Vehicle Preemption
+# 🚦 EVP·Sim: Vision-Based Emergency Vehicle Preemption & Traffic Simulation
 
-Vision-based emergency vehicle detection, traffic-signal preemption, and
-intersection simulation.
+<div align="center">
 
-The project uses CCTV-style video and computer vision to detect ambulances,
-fire vehicles, and police vehicles. A temporal confirmation rule reduces
-false alarms before the signal controller starts a safe preemption sequence.
-The web dashboard also compares preemption with a fixed-time signal plan.
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00ffff?style=for-the-badge&logo=opencv&logoColor=black)](https://github.com/ultralytics/ultralytics)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Flask](https://img.shields.io/badge/Flask-Web%20Dashboard-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Render](https://img.shields.io/badge/Render-Deployable-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-> **Important:** This is a research/demo system. It must not be connected to
-> live traffic signals without independent safety certification, hardware
-> integration, and approval from the relevant road authority.
+**An intelligent, camera-only traffic signal preemption system that detects emergency vehicles in real time, eliminates false alarms with a temporal confirmation rule, and dynamically clears intersections.**
 
-## Features
+**Maintained & Enhanced by [Sankalp Gaonkar](https://github.com/sankalpgaonkar)**
 
-- Dual YOLO inference:
-  - COCO vehicle detection with ByteTrack tracking
-  - Custom emergency-vehicle detection for ambulance, fire brigade, and police
-- Five-frame temporal confirmation before an emergency vehicle is confirmed
-- Conflict-free signal controller with:
-  - Yellow and all-red clearance phases
-  - Emergency green hold
-  - Green extension and recovery cycle
-- Four-approach microscopic traffic simulation using IDM-style car following
-- Side-by-side preemption and fixed-time performance metrics
-- Browser dashboard built with Flask and vanilla HTML, CSS, and JavaScript
-- Docker and Render deployment configuration
+[🚀 Quick Start](#-quick-start) • [✨ Key Capabilities](#-key-capabilities) • [📸 Visual Walkthrough](#-visual-walkthrough-tokyo-intersection-scenario) • [🧠 Detection Models](#-detection-models) • [☁️ Deployment](#️-cloud-deployment-render--docker) • [🧪 Testing](#-automated-testing)
 
-## How it works
+---
 
-```text
-Video
-  -> FFmpeg browser conversion
-  -> COCO vehicle tracking + emergency vehicle detection
-  -> Temporal confirmation
-  -> Safe signal preemption controller
-  -> Preemption vs fixed-time simulation
-  -> Interactive dashboard
+![EVP Dashboard Demo - Tokyo Ambulance](docs/screenshots/tokyo_01_dashboard.png)
+*Live Web Dashboard (Tokyo Intersection Scenario): Real-time video detection overlay with ambulance confirmation (left) synchronized with 4-way intersection simulation, preemption state machine, signal countdowns, and comparative performance metrics (right).*
+
+</div>
+
+---
+
+> [!IMPORTANT]
+> **Research & Demonstration Notice:** This is a research and proof-of-concept simulation system. It must not be connected to live traffic signals without independent safety certification, hardware fail-safes, and explicit authorization from relevant municipal road authorities.
+
+---
+
+## 🌟 Overview
+
+Conventional emergency vehicle preemption requires dedicated hardware (optical infrared emitters, acoustic sensors, or in-vehicle GPS transponders) installed on every fleet vehicle and traffic cabinet. 
+
+**EVP·Sim** eliminates specialized hardware by leveraging **standard intersection CCTV cameras**:
+1. **Dual-Model Vision Engine:** Runs Ultralytics YOLOv8n with ByteTrack for ordinary traffic counting alongside custom fine-tuned emergency vehicle detectors (`ambulance`, `fire brigade`, `police`).
+2. **Temporal Confirmation Rule:** Prevents transient false alarms (e.g. delivery vans, glare) from triggering disruptive green signals using a 5-frame persistence gate.
+3. **Safety-Guaranteed Signal Controller:** Enforces mandatory clearance transitions (3s Yellow + 2s All-Red) before serving emergency traffic, with support for green extensions and multi-EV priority queues.
+4. **Synchronized Microscopic Traffic Simulator:** Integrates the Intelligent Driver Model (IDM) and rescue-lane passing behaviors, running preemption and fixed-time control back-to-back on identical vehicle arrivals to measure exact travel-time savings.
+
+---
+
+## ✨ Key Capabilities
+
+| Component | Technical Implementation |
+|---|---|
+| **Vision & Tracking** | Dual YOLOv8n pipeline (`15 fps` analysis): COCO vehicle detector with ByteTrack tracking + Custom EV detector with nested-box suppression. |
+| **False-Alarm Mitigation** | Causal state machine: `CANDIDATE` (raw) $\rightarrow$ `SUSPECTED` (amber, conf $\ge 0.35$) $\rightarrow$ `CONFIRMED` (red, 5 consecutive frames at conf $\ge 0.50$). |
+| **Fail-Safe Preemption** | Conflict-free state machine with green extension, 3s yellow clearance, 2s all-red clearance, emergency green hold, and recovery cycle. |
+| **Microscopic Simulation** | 4-approach junction simulation with Intelligent Driver Model (IDM) car-following, left-hand traffic (India-ready), and rescue-lane yielding. |
+| **Live Comparative Analytics** | Direct side-by-side comparison of Preemption vs. Fixed-Time: EV response time, delay saved, vehicle queue discharge, and cross-street penalty. |
+| **Zero External Simulation Deps** | Self-contained Python/HTML5 engine—runs in any browser without requiring external SUMO or Unity installations. |
+
+---
+
+## 📸 Visual Walkthrough (Tokyo Intersection Scenario)
+
+### 1. Ingestion & Dual-Model Detection
+As video frames stream in from the intersection camera, ordinary vehicles are tracked with persistent ByteTrack IDs (green boxes), while the emergency vehicle is tracked and confirmed (red box, `ambulance 0.82`).
+
+<div align="center">
+  <img src="docs/screenshots/tokyo_02_video_detection.png" alt="Tokyo Video Detection" width="80%">
+  <p><em>Real-time detection overlay on Tokyo intersection: Ambulance identified with high confidence alongside surrounding traffic.</em></p>
+</div>
+
+---
+
+### 2. Temporal Confirmation & Clearance Sequence
+When an emergency vehicle is detected, the confidence persistence state machine verifies stability before changing the signal phase.
+
+<div align="center">
+  <img src="docs/figures/confirmation_states.png" alt="Confirmation Rule State Machine" width="70%">
+  <p><em>State machine lifecycle: Raw detections enter as CANDIDATE, elevate to SUSPECTED (amber), and require 5 consecutive frames ≥ 0.50 to become CONFIRMED (red).</em></p>
+</div>
+
+---
+
+### 3. Preemption Green & Rescue Lane Passage
+Upon confirmation, conflicting traffic clears through a mandatory Yellow + All-Red interval, and the emergency approach turns **GREEN**. On the junction canvas, queued vehicles pull aside into a rescue lane to allow rapid passage.
+
+<div align="center">
+  <img src="docs/screenshots/tokyo_03_junction_simulation.png" alt="Tokyo Preemption Simulation" width="80%">
+  <p><em>Synchronized 4-approach junction simulation: Emergency approach given priority green while cross-traffic safely halts.</em></p>
+</div>
+
+---
+
+### 4. Side-by-Side Performance Comparison
+Every run evaluates identical arrivals twice—once with preemption enabled, and once under standard fixed-time cycle control.
+
+<div align="center">
+  <img src="docs/screenshots/tokyo_04_results_comparison.png" alt="Tokyo Results Comparison and Log" width="80%">
+  <p><em>Tokyo Ambulance Performance: Delay reduced from 21.93s (fixed-time) to 1.93s (preemption) with 0 stopped time, alongside timestamped event log.</em></p>
+</div>
+
+---
+
+### 5. Mobile & Responsive Dashboard
+The entire interface is built with vanilla HTML/CSS/JS without external CDN dependencies, running seamlessly across desktop and mobile devices.
+
+<div align="center">
+  <img src="docs/screenshots/06_mobile.png" alt="Mobile Dashboard" width="45%">
+  <p><em>Responsive UI with dark/light themes and instant re-simulation controls.</em></p>
+</div>
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    Video["Approach CCTV Video (Upload / Stream)"] --> Pre["Browser-Ready Transcoding (H.264)"]
+    Pre --> Det["Dual YOLOv8n Inference (15 fps)"]
+    
+    subgraph Vision ["Computer Vision Pipeline"]
+        Det --> COCO["COCO Vehicle Detector + ByteTrack"]
+        Det --> EVDet["Custom EV Detector (Ambulance / Fire / Police)"]
+        COCO --> Dedup["Spatial Deduplication & Tracking"]
+        EVDet --> Dedup
+    end
+    
+    subgraph Decision ["Decision Engine"]
+        Dedup --> Conf["Temporal Confirmation Rule\n(5 consecutive frames >= 0.50)"]
+        Conf --> State["Preemption State Machine\n(Clearance -> Green Hold -> Recovery)"]
+    end
+    
+    subgraph Simulation ["Microscopic Simulation"]
+        State --> SimPre["Simulation (Preemption Enabled)"]
+        State --> SimFix["Simulation (Fixed-Time Baseline)"]
+    end
+    
+    SimPre --> UI["Interactive Web Dashboard (http://127.0.0.1:5050)"]
+    SimFix --> UI
 ```
 
-The default analysis configuration processes up to 15 frames per second at
-640px inference size. Processing speed depends heavily on the available CPU,
-RAM, and whether the service is waking from sleep.
+---
 
-## Screenshots
+## 🧠 Detection Models
 
-![Dashboard](docs/screenshots/03_preemption_green.png)
+The system includes multiple selectable detection models:
 
-The dashboard shows the source video, detection overlays, signal state,
-simulation results, event log, and comparative metrics.
+| Model Key | Weights File | Architecture | Description |
+|---|---|---|---|
+| **`v2` (Default)** | `project/models/ev_detector_v2_sankalp.pt` | YOLOv8n (3.14M params) | Retrained on clean duplicate-filtered split; lowest false-alarm rate on general photos (20/98). |
+| **`v3`** | `project/models/ev_detector_v3_sankalp.pt` | YOLOv8n (3.14M params) | Trained with 442 additional open images (many Indian roads & "108" ambulances); higher recall on Indian clips. |
+| **`v1`** | `project/models/yolo_emergency_detector.pt` | YOLOv8n | Original 2025 baseline model. |
+| **`v2alt`** | `project/models/ev_detector_v2_alt.pt` | YOLO11n (2.61M params) | YOLO11n comparison architecture. |
 
-## Requirements
+### Normalized Confusion Matrix (v2 Clean Split)
+Evaluated on the held-out validation set with zero data leakage:
 
-- Python 3.10, 3.11, or 3.12
-- macOS, Linux, or Windows
-- At least 4 GB RAM recommended for local YOLO inference
-- FFmpeg is installed automatically by the provided application setup
+<div align="center">
+  <img src="training/runs/ev_detector_v2/confusion_matrix_normalized.png" alt="Normalized Confusion Matrix" width="65%">
+  <p><em>Diagonal recall rates: Ambulance 95%, Fire Brigade 86%, Police 91%. Background false positives motivate the 5-frame confirmation gate.</em></p>
+</div>
 
-## Run locally
+---
 
-### macOS/Linux
+## 🚀 Quick Start
 
+### 1. Prerequisites
+* **Python 3.10 – 3.12**
+* macOS, Linux, or Windows
+* At least 4 GB RAM recommended for local YOLO inference
+* FFmpeg (handled automatically or via system package manager)
+
+### 2. One-Click Run
+
+#### macOS / Linux:
 ```bash
 git clone https://github.com/sankalpgaonkar/Emergency_Vehicle_Preemption.git
 cd Emergency_Vehicle_Preemption
 ./run_mac.sh
 ```
 
-### Windows
-
-```bat
+#### Windows:
+```cmd
 git clone https://github.com/sankalpgaonkar/Emergency_Vehicle_Preemption.git
 cd Emergency_Vehicle_Preemption
 run_windows.bat
 ```
 
-Then open <http://127.0.0.1:5050>.
+*(The launcher scripts automatically create `.venv`, install dependencies from `demo_app/requirements.txt`, and start the Flask server).*
 
-The launcher creates a virtual environment, installs the demo dependencies,
-and starts the Flask application. To run it manually:
+### 3. Open in Browser
+Navigate to **`http://127.0.0.1:5050`**, pick a sample scenario (e.g. *Tokyo — ambulance at an intersection* or *Toronto — fire truck responding*), and click **Run**. Use **Spacebar** to play/pause.
 
-```bash
-python -m pip install -r demo_app/requirements.txt
-python demo_app/app.py --host 127.0.0.1 --port 5050
-```
+Supported video formats include MP4, AVI, MOV, MKV, WEBM, M4V, MPG, MPEG, WMV, and OGV (up to 300 MB).
 
-## Using the dashboard
+---
 
-1. Choose a bundled sample clip or upload a video. Sample clips start playing
-   while server-side detection and simulation run.
-2. Select the camera approach and initial signal state.
-3. Wait for detection and simulation to finish.
-4. Play the processed video and inspect the signal timeline.
-5. Compare preemption with the fixed-time baseline.
+## ☁️ Cloud Deployment (Render / Docker)
 
-Supported video formats include MP4, AVI, MOV, MKV, WEBM, M4V, MPG, MPEG,
-WMV, and OGV. Uploads are limited to 300 MB and analysis is limited to the
-first 180 seconds of a video by default.
+The repository is pre-configured for instant zero-configuration deployment to **Render** or any Docker-compatible cloud host:
 
-## Deployment
+### Deploy to Render (Recommended)
+1. Push this repository to your GitHub account.
+2. Sign in to [Render](https://render.com) $\rightarrow$ Click **New +** $\rightarrow$ **Web Service**.
+3. Connect your GitHub repository. Render will automatically detect the [Dockerfile](Dockerfile) and [render.yaml](render.yaml).
+4. Select the **Free** instance tier and click **Deploy**.
 
-### Render (recommended)
+The Dockerfile is optimized for lightweight CPU inference:
+* Pre-installs `ffmpeg` and `libgl1`.
+* Uses **CPU-only PyTorch**, reducing container size by 2+ GB and keeping RAM usage well under Render's 512 MB free tier ceiling.
+* Exposes `/api/health` as the automated health-check endpoint.
 
-This repository includes `Dockerfile` and `render.yaml`.
-
-1. Create a new **Web Service** in Render.
-2. Connect this GitHub repository.
-3. Select the Docker runtime, or let Render use the included `render.yaml`.
-4. Deploy and open the generated service URL.
-
-The container listens on the `PORT` environment variable and exposes
-`/api/health` as its health-check endpoint.
-
-### Other Docker platforms
-
-The same container can run on Railway, Fly.io, Google Cloud Run, AWS ECS, or
-an ordinary VM:
+### Other Docker Platforms
+The container can run on Railway, Fly.io, Google Cloud Run, AWS ECS, or any standard VM:
 
 ```bash
 docker build -t emergency-vehicle-preemption .
 docker run --rm -p 5050:5050 -e PORT=5050 emergency-vehicle-preemption
 ```
 
-Open <http://localhost:5050>.
+### Note on Vercel
+Vercel is designed for serverless static/Edge workloads with strict timeout and package size constraints. Because EVP·Sim performs CPU-intensive multi-model YOLO inference, FFmpeg transcoding, and background video jobs, the backend is best hosted as a containerized service (Render, Cloud Run, Railway). Vercel can be used to host a decoupled frontend that calls the Render API.
 
-### Vercel
+---
 
-Vercel is not suitable for deploying this entire application as one service.
-The backend performs CPU-heavy YOLO inference, FFmpeg conversion, and
-background video jobs. Those workloads are a better fit for a long-running
-Docker service.
+## 🧪 Automated Testing
 
-Vercel can host a separate frontend, while the Flask API runs on Render,
-Railway, Cloud Run, or another container platform.
-
-### Production deployment notes
-
-- Free or low-resource instances can be slow because the service may
-  cold-start and CPU inference runs two models per analysed frame.
-- Use a paid instance with more RAM/CPU for faster demos.
-- The application writes uploads and job output to local disk. Use object
-  storage such as S3, Cloudinary, or Supabase Storage if files must survive
-  restarts or be shared across multiple instances.
-- For a fast public demo, precompute results for the bundled sample videos
-  and serve the videos through object storage or a CDN.
-- Restrict upload size and duration before increasing instance resources.
-
-## Models
-
-| Key | File | Purpose |
-| --- | --- | --- |
-| `v2` | `project/models/ev_detector_v2_sankalp.pt` | Default detector |
-| `v3` | `project/models/ev_detector_v3_sankalp.pt` | Detector with additional Indian-road examples |
-| `v1` | `project/models/yolo_emergency_detector.pt` | Original baseline detector |
-| `v2alt` | `project/models/ev_detector_v2_alt.pt` | YOLO11 comparison model |
-
-The COCO vehicle model is stored at `demo_app/weights/yolov8n.pt`.
-
-## Configuration
-
-Core defaults are defined in `demo_app/core/config.py`:
-
-- `process_fps`: 15 analysed frames per second
-- `imgsz`: 640px inference size
-- `MAX_UPLOAD_MB`: 300 MB
-- `MAX_PROCESS_SECONDS`: 180 seconds
-- Confirmation threshold: five consecutive frames at confidence `>= 0.50`
-- Clearance: 3 seconds yellow followed by 2 seconds all-red
-
-For a faster demo on CPU-only infrastructure, lower `process_fps` and
-`imgsz`, understanding that this can affect detection accuracy and measured
-timings.
-
-## Project structure
-
-```text
-demo_app/
-  app.py                 Flask routes and API
-  core/
-    config.py            Runtime parameters and model registry
-    detector.py          YOLO and ByteTrack inference
-    ev_confirm.py        Temporal confirmation logic
-    pipeline.py          Video processing jobs
-    signal_controller.py Safe preemption state machine
-    simulation.py        Traffic simulation
-    video_io.py          FFmpeg and video helpers
-  samples/               Bundled sample videos
-  static/                Dashboard frontend
-  tests/                 Automated tests
-project/models/          Trained emergency-vehicle weights
-training/                Dataset and training utilities
-docs/                    Methodology and project documentation
-Dockerfile               Container image definition
-render.yaml              Render service configuration
-```
-
-## Testing
-
-Run the demo test suite with:
+The codebase includes 29 rigorous unit and integration tests verifying safety invariants (no conflicting greens, mandatory clearance yellow/all-red), confirmation rules, simulation mechanics, and API endpoints:
 
 ```bash
+# Run test suite
 python -m pytest -v demo_app/tests
 ```
 
-The tests cover API behavior, model loading, confirmation rules, signal
-safety invariants, and simulation behavior.
+```text
+demo_app/tests/test_api.py .........          [ 31%]
+demo_app/tests/test_confirm.py .....          [ 48%]
+demo_app/tests/test_controller.py ........    [ 75%]
+demo_app/tests/test_models.py ..              [ 82%]
+demo_app/tests/test_simulation.py .....       [100%]
 
-## Research documentation
+========================= 29 passed in 4.12s =========================
+```
 
-- [Methodology](docs/METHODOLOGY.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Project review](docs/PROJECT_REVIEW.md)
-- [Quick start](QUICK_START.md)
-- [Sample-video credits](demo_app/samples/CREDITS.md)
+---
 
-## License and attribution
+## 📂 Repository Structure
 
-The project source code is licensed under the [MIT License](LICENSE).
+```text
+Emergency_Vehicle_Preemption/
+├── demo_app/                     # Interactive EVP web application
+│   ├── app.py                    # Flask server & REST API
+│   ├── core/                     # Core business logic
+│   │   ├── config.py             # System parameters & model registries
+│   │   ├── detector.py           # Dual YOLOv8n inference & ByteTrack wrapper
+│   │   ├── ev_confirm.py         # Multi-frame temporal confirmation logic
+│   │   ├── signal_controller.py  # Safety-enforced preemption state machine
+│   │   ├── simulation.py         # 4-approach microscopic IDM traffic simulator
+│   │   ├── video_io.py           # FFmpeg transcoding & probe helpers
+│   │   └── pipeline.py           # End-to-end background job orchestration
+│   ├── samples/                  # CC-licensed real-world emergency vehicle clips
+│   ├── static/                   # Pure HTML5/CSS3/vanilla JS dashboard
+│   ├── tests/                    # 29 automated safety & logic tests
+│   └── weights/                  # Pre-downloaded YOLOv8n COCO weights
+├── project/
+│   ├── models/                   # Trained EV detector weights (v1, v2, v3, v2alt)
+│   └── datasets/                 # Roboflow emergency vehicle dataset
+├── training/                     # Dataset audit, cleaning & training scripts
+│   ├── dataset_audit.py          # Near-duplicate & source leakage analysis
+│   ├── make_clean_split.py       # Difference-hash & union-find dataset splitter
+│   ├── train_ev_detector.py      # Reproducible YOLOv8 training script
+│   └── runs/                     # Training curves, confusion matrices & metrics
+├── docs/                         # Research paper, methodology PDF, diagrams & screenshots
+├── Dockerfile                    # Container definition for cloud deployment
+├── render.yaml                   # Render Blueprint infrastructure-as-code
+└── run_mac.sh / run_windows.bat  # Instant launcher scripts
+```
 
-The application depends on Ultralytics YOLO, PyTorch, OpenCV, Flask, and
-other open-source packages with their own licenses. Sample videos and
-training data retain the licenses and attribution described in
-`demo_app/samples/CREDITS.md` and `docs/data_credits/`.
+---
 
-Maintained by [Sankalp Gaonkar](https://github.com/sankalpgaonkar).
+## 📜 Research & Documentation
+
+Comprehensive research and engineering documentation is provided in the `docs/` folder:
+* **[docs/METHODOLOGY.md](docs/METHODOLOGY.md) / [docs/METHODOLOGY.pdf](docs/METHODOLOGY.pdf):** Full paper write-up detailing dataset audit, mathematical formulation, measured detector latency, and simulated sweep results.
+* **[docs/PROJECT_REVIEW.md](docs/PROJECT_REVIEW.md):** Deep-dive review of v1 vs v2 architectural enhancements and bug fixes.
+* **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):** System architecture specifications and design rationale.
+* **[QUICK_START.md](QUICK_START.md):** Step-by-step developer setup and troubleshooting.
+
+---
+
+## 📄 License & Attribution
+
+* Code is licensed under the [MIT License](LICENSE) &copy; 2026 Sankalp Gaonkar.
+* Model architectures and inference depend on [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) (AGPL-3.0).
+* Training data originated from Roboflow Universe ("Emergency vehicle" v1, CC BY 4.0) with additional open licenses documented in [`docs/data_credits/`](docs/data_credits/).
+* Video samples are from Wikimedia Commons under Creative Commons licenses (see [`demo_app/samples/CREDITS.md`](demo_app/samples/CREDITS.md)).

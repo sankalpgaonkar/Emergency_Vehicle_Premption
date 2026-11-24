@@ -164,19 +164,19 @@ async function poll(id) {
 }
 
 // ---------------------------------------------------------------- dashboard
-async function loadResult(id) {
+async function loadResult(id, initialT = 0) {
   let res;
   try { res = await api(`/api/jobs/${id}/result`); } catch (e) { return failProc(e.message); }
   clearProcessingVideo();
   state.res = res; state.jobId = id; state.inject = [];
-  history.replaceState(null, "", `/?job=${id}`);
+  history.replaceState(null, "", `/?job=${id}` + (initialT ? `&t=${initialT}` : ""));
   show("dashboard"); setStep(3);
   const v = $("#video"); v.src = `/api/jobs/${id}/video`; v.load();
   v.playbackRate = state.speed;
   state.vidDur = res.analysis.duration;
   $("#csvBtn").href = `/api/jobs/${id}/report.csv`;
   applyResult(true);
-  state.t = 0; seek(0);
+  state.t = initialT; seek(initialT);
 }
 function applyResult(first) {
   const r = state.res, a = r.analysis;
@@ -740,6 +740,7 @@ function initDashboard() {
 window.addEventListener("DOMContentLoaded", () => {
   initTheme(); initStart(); initDashboard(); requestAnimationFrame(tick);
   const q = new URLSearchParams(location.search);
-  if (q.get("job")) api(`/api/jobs/${q.get("job")}`).then(j => { if (j.status === "done") loadResult(j.id); else { show("processing"); poll(j.id); } }).catch(() => { });
+  const initT = q.get("t") ? Number(q.get("t")) : 0;
+  if (q.get("job")) api(`/api/jobs/${q.get("job")}`).then(j => { if (j.status === "done") loadResult(j.id, initT); else { show("processing"); poll(j.id); } }).catch(() => { });
   if (q.get("theme")) document.documentElement.dataset.theme = q.get("theme");
 });
